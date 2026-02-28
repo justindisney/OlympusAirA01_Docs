@@ -397,7 +397,7 @@
                         <div class="form-group">
                             <label>Configuration Name <span class="required">*</span></label>
                             <input type="text" id="configName" placeholder="e.g., Street Photography B&W" required>
-                            <div class="help-text">Give your configuration a descriptive name</div>
+                            <div class="help-text">Give your configuration a descriptive name. File will be saved as "Favorite-[YourName].plist"</div>
                         </div>
                     </div>
 
@@ -1105,9 +1105,19 @@
             <!-- Output Panel -->
             <div class="output-panel">
                 <h2 class="section-title">Generated .plist File</h2>
+
+                <div class="info-box">
+                    <strong>Using with Play OPC:</strong><br>
+                    1. Download <a href="https://apps.apple.com/us/app/play-opc/id999316498" target="_blank" style="color: var(--accent);">Play OPC</a> from the iOS App Store<br>
+                    2. Click "Download .plist" below to save the file (must start with "Favorite-")<br>
+                    3. Transfer the .plist file to the "Play OPC" folder in the Files app on your iPhone<br>
+                    4. Load the favorite preset from within the Play OPC app
+                </div>
+
                 <textarea id="outputArea" readonly placeholder="Configure settings and click 'Generate Configuration' to see the output..."></textarea>
                 <div class="output-actions">
                     <button class="btn btn-primary" onclick="generatePlist()">Generate Configuration</button>
+                    <button class="btn btn-secondary" onclick="downloadPlist()">Download .plist</button>
                     <button class="btn btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
                 </div>
             </div>
@@ -2236,6 +2246,38 @@
             const btn = event.target;
             const originalText = btn.textContent;
             btn.textContent = '✓ Copied!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+
+        function downloadPlist() {
+            const output = document.getElementById('outputArea').value;
+            if (!output) {
+                alert('Please generate a configuration first');
+                return;
+            }
+
+            const configName = document.getElementById('configName').value || 'Configuration';
+            // Ensure filename starts with "Favorite-"
+            const sanitizedName = configName.replace(/[^a-zA-Z0-9\s-]/g, '').replace(/\s+/g, '-');
+            const filename = `Favorite-${sanitizedName}.plist`;
+
+            // Create blob and download
+            const blob = new Blob([output], { type: 'application/xml' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            // Update button text
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Downloaded!';
             setTimeout(() => {
                 btn.textContent = originalText;
             }, 2000);
