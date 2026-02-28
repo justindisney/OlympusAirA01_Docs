@@ -542,6 +542,93 @@
                         </div>
                     </div>
 
+                    <!-- Picture Style -->
+                    <div class="section">
+                        <h2 class="section-title">Picture Style</h2>
+
+                        <div class="form-group">
+                            <label>Color Tone (COLORTONE)</label>
+                            <select id="colortone">
+                                <optgroup label="Basic Picture Modes">
+                                    <option value="NATURAL" selected>Natural</option>
+                                    <option value="VIVID">Vivid</option>
+                                    <option value="FLAT">Flat (Muted)</option>
+                                    <option value="Monotone">Monotone (B&W)</option>
+                                    <option value="I_FINISH">i-Finish (i-Enhance)</option>
+                                    <option value="Portrait">Portrait</option>
+                                    <option value="ePortrait">e-Portrait</option>
+                                    <option value="COLOR_CREATOR">Color Creator</option>
+                                </optgroup>
+                                <optgroup label="Art Filter Modes">
+                                    <option value="POPART">Pop Art</option>
+                                    <option value="FANTASIC_FOCUS">Soft Focus</option>
+                                    <option value="DAYDREAM">Pale & Light Color</option>
+                                    <option value="LIGHT_TONE">Light Tone</option>
+                                    <option value="ROUGH_MONOCHROME">Grainy Film</option>
+                                    <option value="TOY_PHOTO">Pin Hole</option>
+                                    <option value="MINIATURE">Diorama</option>
+                                    <option value="CROSS_PROCESS">Cross Process</option>
+                                    <option value="GENTLE_SEPIA">Gentle Sepia</option>
+                                    <option value="DRAMATIC_TONE">Dramatic Tone</option>
+                                    <option value="LIGNE_CLAIR">Key Line</option>
+                                    <option value="PASTEL">Watercolor</option>
+                                    <option value="VINTAGE">Vintage</option>
+                                    <option value="PARTCOLOR">Partial Color</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div id="pictureAdjustments" class="subsection">
+                            <div class="form-group">
+                                <label>Contrast</label>
+                                <div class="range-input">
+                                    <input type="range" id="contrast" min="-5" max="5" step="1" value="0">
+                                    <span class="range-value" id="contrastValue">0</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sharpness</label>
+                                <div class="range-input">
+                                    <input type="range" id="sharp" min="-5" max="5" step="1" value="0">
+                                    <span class="range-value" id="sharpValue">0</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="saturationGroup">
+                                <label>Saturation</label>
+                                <div class="range-input">
+                                    <input type="range" id="saturation" min="-5" max="5" step="1" value="0">
+                                    <span class="range-value" id="saturationValue">0</span>
+                                </div>
+                            </div>
+
+                            <div id="monotoneControls" style="display: none;">
+                                <div class="form-group">
+                                    <label>B&W Filter</label>
+                                    <select id="monotoneFilter">
+                                        <option value="NORMAL">Normal</option>
+                                        <option value="YELLOW">Yellow</option>
+                                        <option value="ORANGE">Orange</option>
+                                        <option value="RED">Red</option>
+                                        <option value="GREEN">Green</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>B&W Toning</label>
+                                    <select id="monotoneColor">
+                                        <option value="NORMAL">Normal (Pure B&W)</option>
+                                        <option value="SEPIA">Sepia</option>
+                                        <option value="BLUE">Blue</option>
+                                        <option value="PURPLE">Purple</option>
+                                        <option value="GREEN">Green</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Exposure Settings -->
                     <div class="section">
                         <h2 class="section-title">Exposure</h2>
@@ -792,93 +879,6 @@
                                 <div class="range-input">
                                     <input type="range" id="wbRevG" min="-7" max="7" step="1" value="0">
                                     <span class="range-value" id="wbRevGValue">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Picture Style -->
-                    <div class="section">
-                        <h2 class="section-title">Picture Style</h2>
-
-                        <div class="form-group">
-                            <label>Color Tone (COLORTONE)</label>
-                            <select id="colortone">
-                                <optgroup label="Basic Picture Modes">
-                                    <option value="NATURAL" selected>Natural</option>
-                                    <option value="VIVID">Vivid</option>
-                                    <option value="FLAT">Flat (Muted)</option>
-                                    <option value="Monotone">Monotone (B&W)</option>
-                                    <option value="I_FINISH">i-Finish (i-Enhance)</option>
-                                    <option value="Portrait">Portrait</option>
-                                    <option value="ePortrait">e-Portrait</option>
-                                    <option value="COLOR_CREATOR">Color Creator</option>
-                                </optgroup>
-                                <optgroup label="Art Filter Modes">
-                                    <option value="POPART">Pop Art</option>
-                                    <option value="FANTASIC_FOCUS">Soft Focus</option>
-                                    <option value="DAYDREAM">Pale & Light Color</option>
-                                    <option value="LIGHT_TONE">Light Tone</option>
-                                    <option value="ROUGH_MONOCHROME">Grainy Film</option>
-                                    <option value="TOY_PHOTO">Pin Hole</option>
-                                    <option value="MINIATURE">Diorama</option>
-                                    <option value="CROSS_PROCESS">Cross Process</option>
-                                    <option value="GENTLE_SEPIA">Gentle Sepia</option>
-                                    <option value="DRAMATIC_TONE">Dramatic Tone</option>
-                                    <option value="LIGNE_CLAIR">Key Line</option>
-                                    <option value="PASTEL">Watercolor</option>
-                                    <option value="VINTAGE">Vintage</option>
-                                    <option value="PARTCOLOR">Partial Color</option>
-                                </optgroup>
-                            </select>
-                        </div>
-
-                        <div id="pictureAdjustments" class="subsection">
-                            <div class="form-group">
-                                <label>Contrast</label>
-                                <div class="range-input">
-                                    <input type="range" id="contrast" min="-5" max="5" step="1" value="0">
-                                    <span class="range-value" id="contrastValue">0</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Sharpness</label>
-                                <div class="range-input">
-                                    <input type="range" id="sharp" min="-5" max="5" step="1" value="0">
-                                    <span class="range-value" id="sharpValue">0</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group" id="saturationGroup">
-                                <label>Saturation</label>
-                                <div class="range-input">
-                                    <input type="range" id="saturation" min="-5" max="5" step="1" value="0">
-                                    <span class="range-value" id="saturationValue">0</span>
-                                </div>
-                            </div>
-
-                            <div id="monotoneControls" style="display: none;">
-                                <div class="form-group">
-                                    <label>B&W Filter</label>
-                                    <select id="monotoneFilter">
-                                        <option value="NORMAL">Normal</option>
-                                        <option value="YELLOW">Yellow</option>
-                                        <option value="ORANGE">Orange</option>
-                                        <option value="RED">Red</option>
-                                        <option value="GREEN">Green</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>B&W Toning</label>
-                                    <select id="monotoneColor">
-                                        <option value="NORMAL">Normal (Pure B&W)</option>
-                                        <option value="SEPIA">Sepia</option>
-                                        <option value="BLUE">Blue</option>
-                                        <option value="PURPLE">Purple</option>
-                                        <option value="GREEN">Green</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
