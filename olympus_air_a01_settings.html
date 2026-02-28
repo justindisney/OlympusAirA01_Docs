@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympus Air A01 Quick Start - Configuration Reference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #4a4a4a;
+            --accent: #0066cc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6a6a6a;
+            --border: #e5e5e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--bg-primary);
+            color: var(--primary);
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .header-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        header .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .search-container {
+            background: var(--bg-primary);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 110px;
+            z-index: 99;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            font-size: 1rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            transition: all 0.15s ease;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.05);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--bg-primary);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-size: 0.875rem;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: 0.2px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            background: var(--bg-tertiary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        main {
+            background: var(--bg-primary);
+            margin: 2rem 0;
+            border-radius: 2px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background: var(--bg-secondary);
+            color: var(--primary);
+            position: sticky;
+            top: 175px;
+            z-index: 10;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr {
+            transition: background-color 0.15s ease;
+        }
+
+        tbody tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        tbody tr.hidden {
+            display: none;
+        }
+
+        .category-row {
+            background: var(--bg-tertiary);
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .category-row td {
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .required-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            text-align: center;
+            min-width: 35px;
+        }
+
+        .required-y {
+            background: var(--bg-secondary);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .required-n {
+            background: var(--bg-secondary);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .required-nc {
+            background: var(--bg-secondary);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .required-ro {
+            background: var(--bg-secondary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        code {
+            background: var(--bg-secondary);
+            color: var(--primary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.85em;
+        }
+
+        .detail-section {
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .detail-section h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-section h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-section table {
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+
+        .detail-section td, .detail-section th {
+            padding: 0.75rem;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            border-left: 2px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 2px;
+        }
+
+        .info-box strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .example-box {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .example-box pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.875rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .quick-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.15s ease;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .quick-link:hover {
+            background: var(--secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        .legend {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .filter-buttons {
+                width: 100%;
+            }
+
+            .filter-btn {
+                flex: 1;
+                text-align: center;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .detail-section {
+                padding: 1rem;
+            }
+
+            .quick-links {
+                flex-direction: column;
+            }
+
+            .quick-link {
+                text-align: center;
+            }
+        }
+
+        @media print {
+            header {
+                position: static;
+            }
+
+            .search-container {
+                display: none;
+            }
+
+            tbody tr:hover {
+                background-color: transparent;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-4px);
+        }
+
+        .property-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .property-link:hover {
+            text-decoration: underline;
+        }
+
+        .values-cell {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.8em;
+            max-width: 400px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-wrapper">
+                <img src="logoAirA01.png" alt="Olympus Air" class="logo">
+                <div>
+                    <h1>Configuration Reference</h1>
+                    <p>Complete quick start guide for all camera properties and settings</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search properties... (e.g., aperture, ISO, art filter)">
+            </div>
+            <div class="filter-buttons" style="margin-top: 1rem;">
+                <button class="filter-btn active" data-filter="all">All Properties</button>
+                <button class="filter-btn" data-filter="required">Required Only</button>
+                <button class="filter-btn" data-filter="optional">Optional</button>
+                <button class="filter-btn" data-filter="exposure">Exposure</button>
+                <button class="filter-btn" data-filter="focus">Focus</button>
+                <button class="filter-btn" data-filter="art">Art Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="required-badge required-y">Y</span>
+                    <span>Required</span>
+                </div>
+                <div class="legend-item">
+                    <span class="required-badge required-n">N</span>
+                    <span>Optional</span>
+                </div>
+                <div class="legend-item">
+                    <span class="required-badge required-nc">N*</span>
+                    <span>Conditional</span>
+                </div>
+                <div class="legend-item">
+                    <span class="required-badge required-ro">RO</span>
+                    <span>Read-Only</span>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="propsTable">
+                    <thead>
+                        <tr>
+                            <th>Configuration</th>
+                            <th>Req</th>
+                            <th>Valid Values</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- CORE MODES -->
+                        <tr class="category-row">
+                            <td colspan="4">Core Modes</td>
+                        </tr>
+                        <tr data-category="mode" data-required="y">
+                            <td><code>TAKEMODE</code></td>
+                            <td><span class="required-badge required-y">Y</span></td>
+                            <td class="values-cell">iAuto | P | A | S | M | ART | movie</td>
+                            <td>Shooting mode - <a href="#takemode-detail" class="property-link">details</a></td>
+                        </tr>
+
+                        <!-- EXPOSURE -->
+                        <tr class="category-row">
+                            <td colspan="4">Exposure</td>
+                        </tr>
+                        <tr data-category="exposure" data-required="nc">
+                            <td><code>APERTURE</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22, 25, 29, 32, 36, 40, 45, 51, 57, 64, 72, 81, 91</td>
+                            <td>F-stop (TAKEMODE=A/M, lens must support)</td>
+                        </tr>
+                        <tr data-category="exposure" data-required="nc">
+                            <td><code>SHUTTER</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">4000, 3200, 2500, 2000, 1600, 1250, 1000, 800, 640, 500, 400, 320, 250, 200, 160, 125, 100, 80, 60, 50, 40, 30, 25, 20, 15, 13, 10, 8, 6, 5, 4...</td>
+                            <td>Shutter speed 1/N sec (TAKEMODE=S/M)</td>
+                        </tr>
+                        <tr data-category="exposure" data-required="n">
+                            <td><code>ISO</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">Auto | 100-16000</td>
+                            <td>ISO 100, 125, 160, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 8000, 10000, 12800, 16000</td>
+                        </tr>
+                        <tr data-category="exposure" data-required="n">
+                            <td><code>EXPREV</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">0.0, ±0.3, ±0.7, ±1.0, ±1.3, ±1.7, ±2.0, ±2.3, ±2.7, ±3.0, ±3.3, ±3.7, ±4.0, ±4.3, ±4.7, ±5.0</td>
+                            <td>Exposure compensation in 1/3 EV stop increments (±5 EV range)</td>
+                        </tr>
+                        <tr data-category="exposure" data-required="n">
+                            <td><code>AE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">AE_ESP | AE_CENTER | AE_PINPOINT</td>
+                            <td>Metering mode (ESP=multi, CENTER=center-weighted, PINPOINT=spot)</td>
+                        </tr>
+                        <tr data-category="exposure" data-required="n">
+                            <td><code>AE_LOCK_STATE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">LOCK | UNLOCK</td>
+                            <td>Freeze exposure settings</td>
+                        </tr>
+
+                        <!-- FOCUS -->
+                        <tr class="category-row">
+                            <td colspan="4">Focus</td>
+                        </tr>
+                        <tr data-category="focus" data-required="nc">
+                            <td><code>FOCUS_STILL</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">FOCUS_SAF | FOCUS_CAF | FOCUS_MF</td>
+                            <td>Still image AF mode (not in movie mode)</td>
+                        </tr>
+                        <tr data-category="focus" data-required="nc">
+                            <td><code>FOCUS_MOVIE</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">FOCUS_SAF | FOCUS_CAF | FOCUS_MF</td>
+                            <td>Movie AF mode (TAKEMODE=movie only)</td>
+                        </tr>
+                        <tr data-category="focus" data-required="n">
+                            <td><code>FULL_TIME_AF</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">ON | OFF</td>
+                            <td>Continuous AF in live view</td>
+                        </tr>
+                        <tr data-category="focus" data-required="n">
+                            <td><code>AF_LOCK_STATE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">LOCK | UNLOCK</td>
+                            <td>Freeze focus position</td>
+                        </tr>
+                        <tr data-category="focus" data-required="n">
+                            <td><code>FACE_SCAN</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">FACE_SCAN_ON | FACE_SCAN_OFF</td>
+                            <td>Face detection (up to 8 faces)</td>
+                        </tr>
+
+                        <!-- WHITE BALANCE -->
+                        <tr class="category-row">
+                            <td colspan="4">White Balance</td>
+                        </tr>
+                        <tr data-category="wb" data-required="n">
+                            <td><code>WB</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">WB_AUTO | MWB_FINE | MWB_SHADE | MWB_CLOUD | MWB_LAMP | MWB_FLUOR1 | MWB_WATER_1 | WB_CUSTOM1</td>
+                            <td>White balance preset - <a href="#wb-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="wb" data-required="nc">
+                            <td><code>CUSTOM_WB_KELVIN_1</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">2000-14000 (56 values)</td>
+                            <td>Custom Kelvin temp (WB=WB_CUSTOM1) - <a href="#kelvin-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="wb" data-required="n">
+                            <td><code>WB_REV_AUTO</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">-7 to +7</td>
+                            <td>Auto WB amber-blue adjustment</td>
+                        </tr>
+                        <tr data-category="wb" data-required="n">
+                            <td><code>WB_REV_G_AUTO</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">-7 to +7</td>
+                            <td>Auto WB green-magenta adjustment</td>
+                        </tr>
+                        <tr data-category="wb" data-required="n">
+                            <td><code>AUTO_WB_DENKYU_COLORED_LEAVING</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">ON | OFF</td>
+                            <td>Preserve warm tungsten cast (WB=WB_AUTO)</td>
+                        </tr>
+
+                        <!-- PICTURE STYLE -->
+                        <tr class="category-row">
+                            <td colspan="4">Picture Style</td>
+                        </tr>
+                        <tr data-category="picture" data-required="n">
+                            <td><code>COLORTONE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">NATURAL | VIVID | FLAT | Monotone | I_FINISH | Portrait | ePortrait | COLOR_CREATOR | [14 art filters]</td>
+                            <td>Picture mode - <a href="#colortone-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="picture" data-required="nc">
+                            <td><code>CONTRAST_NATURAL</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">-5 to +5</td>
+                            <td>Contrast (COLORTONE=NATURAL)</td>
+                        </tr>
+                        <tr data-category="picture" data-required="nc">
+                            <td><code>SHARP_NATURAL</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">-5 to +5</td>
+                            <td>Sharpness (COLORTONE=NATURAL)</td>
+                        </tr>
+                        <tr data-category="picture" data-required="nc">
+                            <td><code>SATURATION_LEVEL_NATURAL</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">-5 to +5</td>
+                            <td>Saturation (COLORTONE=NATURAL)</td>
+                        </tr>
+                        <tr data-category="picture" data-required="n">
+                            <td><code>TONE_CONTROL_LOW</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">-5 to +5</td>
+                            <td>Shadow adjustment</td>
+                        </tr>
+                        <tr data-category="picture" data-required="n">
+                            <td><code>TONE_CONTROL_MIDDLE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">-5 to +5</td>
+                            <td>Midtone adjustment</td>
+                        </tr>
+                        <tr data-category="picture" data-required="n">
+                            <td><code>TONE_CONTROL_HIGH</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">-5 to +5</td>
+                            <td>Highlight adjustment</td>
+                        </tr>
+                        <tr data-category="picture" data-required="nc">
+                            <td><code>MONOTONEFILTER_MONOCHROME</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">NORMAL | YELLOW | ORANGE | RED | GREEN</td>
+                            <td>B&W color filter (COLORTONE=Monotone)</td>
+                        </tr>
+                        <tr data-category="picture" data-required="nc">
+                            <td><code>MONOTONECOLOR_MONOCHROME</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">NORMAL | SEPIA | BLUE | PURPLE | GREEN</td>
+                            <td>B&W toning (COLORTONE=Monotone)</td>
+                        </tr>
+
+                        <!-- ART FILTERS -->
+                        <tr class="category-row">
+                            <td colspan="4">Art Filters</td>
+                        </tr>
+                        <tr data-category="art" data-required="nc">
+                            <td><code>RECENTLY_ART_FILTER</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">POPART | FANTASIC_FOCUS | PASTEL | LIGHT_TONE | ROUGH_MONOCHROME | TOY_PHOTO | MINIATURE | CROSS_PROCESS | GENTLE_SEPIA | DRAMATIC_TONE | LIGNE_CLAIR | DAYDREAM | VINTAGE | PARTCOLOR | ART_BKT</td>
+                            <td>Art filter selection (TAKEMODE=ART) - <a href="#art-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="art" data-required="nc">
+                            <td><code>ART_EFFECT_TYPE_POPART</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">TYPE1 | TYPE2 | TYPE3</td>
+                            <td>Pop Art variation (filter=POPART)</td>
+                        </tr>
+                        <tr data-category="art" data-required="nc">
+                            <td><code>ART_EFFECT_HYBRID_*</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">OFF | FANTASIC_FOCUS | TOY_PHOTO | WHITE_EDGE | FRAME_JAGGY | STARLIGHT | [more]</td>
+                            <td>Hybrid effects - <a href="#hybrid-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="art" data-required="nc">
+                            <td><code>BRACKET_PICT_*</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">ON | OFF</td>
+                            <td>Include filter in art bracket (filter=ART_BKT)</td>
+                        </tr>
+
+                        <!-- DRIVE & BRACKETING -->
+                        <tr class="category-row">
+                            <td colspan="4">Drive & Bracketing</td>
+                        </tr>
+                        <tr data-category="drive" data-required="n">
+                            <td><code>TAKE_DRIVE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">DRIVE_NORMAL | DRIVE_CONTINUE</td>
+                            <td>Single shot or continuous</td>
+                        </tr>
+                        <tr data-category="drive" data-required="nc">
+                            <td><code>CONTINUOUS_SHOOTING_VELOCITY</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">1-10</td>
+                            <td>Burst rate fps (TAKE_DRIVE=DRIVE_CONTINUE)</td>
+                        </tr>
+                        <tr data-category="drive" data-required="n">
+                            <td><code>AutoBracketingMode</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">0 | 1</td>
+                            <td>Exposure bracketing off/on</td>
+                        </tr>
+                        <tr data-category="drive" data-required="nc">
+                            <td><code>AutoBracketingCount</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">3 | 5 | 7</td>
+                            <td>Number of bracketed shots (AutoBracketingMode=1)</td>
+                        </tr>
+                        <tr data-category="drive" data-required="nc">
+                            <td><code>AutoBracketingStep</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">1 | 2 | 3</td>
+                            <td>EV step size (AutoBracketingMode=1)</td>
+                        </tr>
+                        <tr data-category="drive" data-required="n">
+                            <td><code>IntervalTimerMode</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">0 | 1</td>
+                            <td>Interval timer off/on</td>
+                        </tr>
+                        <tr data-category="drive" data-required="nc">
+                            <td><code>IntervalTimerTime</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">1.0-99.0</td>
+                            <td>Seconds between shots (IntervalTimerMode=1)</td>
+                        </tr>
+                        <tr data-category="drive" data-required="nc">
+                            <td><code>IntervalTimerCount</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">1-999</td>
+                            <td>Number of interval shots (IntervalTimerMode=1)</td>
+                        </tr>
+
+                        <!-- IMAGE QUALITY -->
+                        <tr class="category-row">
+                            <td colspan="4">Image Quality</td>
+                        </tr>
+                        <tr data-category="quality" data-required="n">
+                            <td><code>IMAGESIZE</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">4608x3456 | 3200x2400 | 2560x1920 | 1920x1440 | 1280x960 | 1024x768 | 640x480</td>
+                            <td>Resolution - <a href="#size-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="quality" data-required="n">
+                            <td><code>ASPECT_RATIO</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">04_03 | 03_02 | 16_09 | 01_01</td>
+                            <td>4:3 (native), 3:2, 16:9, 1:1 square</td>
+                        </tr>
+                        <tr data-category="quality" data-required="n">
+                            <td><code>COMPRESSIBILITY_RATIO</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">CMP_2_7 | CMP_4_0 | CMP_8_0</td>
+                            <td>JPEG compression (lower=better quality)</td>
+                        </tr>
+                        <tr data-category="quality" data-required="n">
+                            <td><code>RAW</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">ON | OFF</td>
+                            <td>Capture RAW+JPEG (ORF format)</td>
+                        </tr>
+                        <tr data-category="quality" data-required="y">
+                            <td><code>DESTINATION_FILE</code></td>
+                            <td><span class="required-badge required-y">Y</span></td>
+                            <td class="values-cell">DESTINATION_FILE_MEDIA</td>
+                            <td>Save to memory card</td>
+                        </tr>
+
+                        <!-- LIVE VIEW -->
+                        <tr class="category-row">
+                            <td colspan="4">Live View</td>
+                        </tr>
+                        <tr data-category="liveview" data-required="n">
+                            <td><code>LiveViewSize</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">{320,240} | {640,480} | {800,600} | {1024,768} | {1280,960}</td>
+                            <td>QVGA, VGA (req for movie), SVGA, XGA, Quad-VGA</td>
+                        </tr>
+                        <tr data-category="liveview" data-required="nc">
+                            <td><code>MagnifyingLiveViewScale</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">0 | 5 | 7 | 10 | 14</td>
+                            <td>Live view zoom (0=off, live view must be active)</td>
+                        </tr>
+                        <tr data-category="liveview" data-required="n">
+                            <td><code>RECVIEW</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">ON | OFF</td>
+                            <td>Show captured image after shot</td>
+                        </tr>
+
+                        <!-- RECORDING -->
+                        <tr class="category-row">
+                            <td colspan="4">Recording</td>
+                        </tr>
+                        <tr data-category="recording" data-required="n">
+                            <td><code>SOUND_VOLUME_LEVEL</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">OFF | LOW | MED | HIGH</td>
+                            <td>Shutter sound volume</td>
+                        </tr>
+                        <tr data-category="recording" data-required="n">
+                            <td><code>GPS</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">ON | OFF</td>
+                            <td>Embed GPS location (GPS device required)</td>
+                        </tr>
+
+                        <!-- SYSTEM -->
+                        <tr class="category-row">
+                            <td colspan="4">System</td>
+                        </tr>
+                        <tr data-category="system" data-required="n">
+                            <td><code>WIFI_CH</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">1-11</td>
+                            <td>WiFi channel (1-11)</td>
+                        </tr>
+                        <tr data-category="system" data-required="n">
+                            <td><code>WIFI_PSWD</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">(string)</td>
+                            <td>WiFi password (alphanumeric)</td>
+                        </tr>
+                        <tr data-category="system" data-required="n">
+                            <td><code>SSID</code></td>
+                            <td><span class="required-badge required-n">N</span></td>
+                            <td class="values-cell">(string)</td>
+                            <td>WiFi network name</td>
+                        </tr>
+
+                        <!-- READ-ONLY STATUS -->
+                        <tr class="category-row">
+                            <td colspan="4">Read-Only Status</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>lensMountStatus</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">normal | normal+electriczoom | down | nolens | cantshoot</td>
+                            <td>Lens state - <a href="#lens-detail" class="property-link">details</a></td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>mediaMountStatus</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">normal | readonly | cardfull | unmount | error</td>
+                            <td>Memory card state</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>mediaBusy</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">true | false</td>
+                            <td>Writing to card (don't remove)</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>highTemperatureWarning</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">true | false</td>
+                            <td>Camera overheating alert</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>BATTERY_LEVEL</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">(varies)</td>
+                            <td>Battery charge level</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>actualApertureValue</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">(decimal)</td>
+                            <td>Current aperture reading</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>actualShutterSpeed</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">(decimal)</td>
+                            <td>Current shutter speed reading</td>
+                        </tr>
+                        <tr data-category="status" data-required="ro">
+                            <td><code>actualIsoSensitivity</code></td>
+                            <td><span class="required-badge required-ro">RO</span></td>
+                            <td class="values-cell">(integer)</td>
+                            <td>Current ISO reading</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- DETAILED SECTIONS -->
+            <div class="detail-section" id="takemode-detail">
+                <h2>TAKEMODE - Shooting Modes</h2>
+                <p>Primary mode selector that affects which other properties are available. <strong>Always set TAKEMODE first.</strong></p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                            <th>Available Properties</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/iAuto&gt;</code></td>
+                            <td>Intelligent Auto</td>
+                            <td>Camera auto-selects all settings</td>
+                            <td>Limited control</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/P&gt;</code></td>
+                            <td>Program</td>
+                            <td>Camera sets aperture & shutter</td>
+                            <td>Most properties</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/A&gt;</code></td>
+                            <td>Aperture Priority</td>
+                            <td>User sets aperture</td>
+                            <td>APERTURE control</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/S&gt;</code></td>
+                            <td>Shutter Priority</td>
+                            <td>User sets shutter speed</td>
+                            <td>SHUTTER control</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/M&gt;</code></td>
+                            <td>Manual</td>
+                            <td>Full manual control</td>
+                            <td>APERTURE + SHUTTER</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/ART&gt;</code></td>
+                            <td>Art Filter</td>
+                            <td>Creative filters</td>
+                            <td>Art filter properties</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;TAKEMODE/movie&gt;</code></td>
+                            <td>Movie</td>
+                            <td>Video recording</td>
+                            <td>Movie properties, FOCUS_MOVIE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="detail-section" id="wb-detail">
+                <h2>White Balance Presets</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Kelvin</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;WB/WB_AUTO&gt;</code></td>
+                            <td>Variable</td>
+                            <td>Auto white balance</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/MWB_FINE&gt;</code></td>
+                            <td>~5300K</td>
+                            <td>Daylight/sunny</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/MWB_SHADE&gt;</code></td>
+                            <td>~7500K</td>
+                            <td>Shade (cooler)</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/MWB_CLOUD&gt;</code></td>
+                            <td>~6000K</td>
+                            <td>Cloudy/overcast</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/MWB_LAMP&gt;</code></td>
+                            <td>~3000K</td>
+                            <td>Tungsten/incandescent</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/MWB_FLUOR1&gt;</code></td>
+                            <td>~4000K</td>
+                            <td>Fluorescent lighting</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/MWB_WATER_1&gt;</code></td>
+                            <td>Variable</td>
+                            <td>Underwater mode</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;WB/WB_CUSTOM1&gt;</code></td>
+                            <td>2000-14000K</td>
+                            <td>Custom Kelvin temperature (see <a href="#kelvin-detail">Kelvin values</a>)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Fine-tuning:</strong> Each preset has corresponding <code>WB_REV_*</code> (amber-blue) and <code>WB_REV_G_*</code> (green-magenta) adjustments ranging from -7 to +7.</p>
+            </div>
+
+            <div class="detail-section" id="kelvin-detail">
+                <h2>Custom White Balance (Kelvin Temperature)</h2>
+                <p>The <code>CUSTOM_WB_KELVIN_1</code> property allows precise color temperature control. <strong>Requires:</strong> <code>WB</code> must be set to <code>WB_CUSTOM1</code> first.</p>
+
+                <div class="info-box">
+                    <strong>Dependency:</strong> This property is only active when <code>WB=WB_CUSTOM1</code>. Set the white balance mode to custom before setting the Kelvin temperature.
+                </div>
+
+                <h3>2000K - 2800K (50K increments) - 17 values</h3>
+                <p><strong>Range:</strong> Warm tungsten/candlelight</p>
+                <div class="example-box">
+                    <pre>2000, 2050, 2100, 2150, 2200, 2250, 2300, 2350, 2400, 2450, 2500, 2550, 2600, 2650, 2700, 2750, 2800</pre>
+                </div>
+
+                <h3>2900K - 4000K (100K increments) - 12 values</h3>
+                <p><strong>Range:</strong> Standard tungsten bulbs to fluorescent</p>
+                <div class="example-box">
+                    <pre>2900, 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000</pre>
+                </div>
+
+                <h3>4200K - 6000K (200K increments) - 10 values</h3>
+                <p><strong>Range:</strong> Fluorescent to daylight</p>
+                <div class="example-box">
+                    <pre>4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000</pre>
+                </div>
+
+                <h3>6200K - 7000K (200K increments) - 5 values</h3>
+                <p><strong>Range:</strong> Overcast to shade</p>
+                <div class="example-box">
+                    <pre>6200, 6400, 6600, 6800, 7000</pre>
+                </div>
+
+                <h3>7400K - 9800K (400K increments) - 7 values</h3>
+                <p><strong>Range:</strong> Deep shade to twilight</p>
+                <div class="example-box">
+                    <pre>7400, 7800, 8200, 8600, 9000, 9400, 9800</pre>
+                </div>
+
+                <h3>10000K - 14000K (1000K increments) - 5 values</h3>
+                <p><strong>Range:</strong> Deep blue sky</p>
+                <div class="example-box">
+                    <pre>10000, 11000, 12000, 13000, 14000</pre>
+                </div>
+
+                <h3>Usage Example</h3>
+                <div class="example-box">
+                    <pre># Step 1: Set WB to Custom mode
+&lt;WB/WB_CUSTOM1&gt;
+
+# Step 2: Set desired Kelvin temperature
+&lt;CUSTOM_WB_KELVIN_1/5600&gt;  # Daylight
+
+# Example: Warm tungsten (2900K)
+&lt;WB/WB_CUSTOM1&gt;
+&lt;CUSTOM_WB_KELVIN_1/2900&gt;
+
+# Example: Cool shade (7400K)
+&lt;WB/WB_CUSTOM1&gt;
+&lt;CUSTOM_WB_KELVIN_1/7400&gt;</pre>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Temperature Range</th>
+                            <th>Lighting Condition</th>
+                            <th>Example Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2000-3000K</td>
+                            <td>Warm tungsten/candlelight</td>
+                            <td>2500, 2900</td>
+                        </tr>
+                        <tr>
+                            <td>3000-3500K</td>
+                            <td>Standard tungsten bulbs</td>
+                            <td>3000, 3200</td>
+                        </tr>
+                        <tr>
+                            <td>4000-4500K</td>
+                            <td>Fluorescent lighting</td>
+                            <td>4000, 4200</td>
+                        </tr>
+                        <tr>
+                            <td>5000-5500K</td>
+                            <td>Daylight/flash</td>
+                            <td>5000, 5400</td>
+                        </tr>
+                        <tr>
+                            <td>6000-6500K</td>
+                            <td>Overcast/cloudy</td>
+                            <td>6000, 6400</td>
+                        </tr>
+                        <tr>
+                            <td>7000-8000K</td>
+                            <td>Shade/deep shadow</td>
+                            <td>7000, 7800</td>
+                        </tr>
+                        <tr>
+                            <td>9000-14000K</td>
+                            <td>Deep blue sky/twilight</td>
+                            <td>9400, 12000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <strong>Total Values:</strong> 56 valid Kelvin temperature settings. Granularity is finest (50K increments) in the warm range where tungsten lighting variations matter most, and coarser at higher temperatures where blue sky variations are less visually significant.
+                </div>
+            </div>
+
+            <div class="detail-section" id="colortone-detail">
+                <h2>COLORTONE - Picture Modes</h2>
+
+                <div class="info-box">
+                    <strong>22 valid values confirmed from PlayOPC source code</strong>
+                </div>
+
+                <h3>Basic Picture Modes (8)</h3>
+                <ul>
+                    <li><code>&lt;COLORTONE/NATURAL&gt;</code> - Balanced natural colors (default)</li>
+                    <li><code>&lt;COLORTONE/VIVID&gt;</code> - Enhanced saturation and contrast</li>
+                    <li><code>&lt;COLORTONE/FLAT&gt;</code> - Low contrast for post-processing (Muted)</li>
+                    <li><code>&lt;COLORTONE/Monotone&gt;</code> - Black & white</li>
+                    <li><code>&lt;COLORTONE/I_FINISH&gt;</code> - Olympus intelligent mode (i-Enhance)</li>
+                    <li><code>&lt;COLORTONE/Portrait&gt;</code> - Portrait optimized</li>
+                    <li><code>&lt;COLORTONE/ePortrait&gt;</code> - Enhanced portrait</li>
+                    <li><code>&lt;COLORTONE/COLOR_CREATOR&gt;</code> - Advanced color control</li>
+                </ul>
+
+                <h3>Art Filter Modes (14)</h3>
+                <ul>
+                    <li><code>&lt;COLORTONE/POPART&gt;</code> - Pop Art (bold vivid colors)</li>
+                    <li><code>&lt;COLORTONE/FANTASIC_FOCUS&gt;</code> - Soft Focus (dreamy ethereal)</li>
+                    <li><code>&lt;COLORTONE/DAYDREAM&gt;</code> - Pale & Light Color / Watercolor (soft watercolor painting)</li>
+                    <li><code>&lt;COLORTONE/LIGHT_TONE&gt;</code> - Light Tone (bright airy)</li>
+                    <li><code>&lt;COLORTONE/ROUGH_MONOCHROME&gt;</code> - Grainy Film (high contrast B&W)</li>
+                    <li><code>&lt;COLORTONE/TOY_PHOTO&gt;</code> - Pin Hole (vignetting + saturated)</li>
+                    <li><code>&lt;COLORTONE/MINIATURE&gt;</code> - Diorama (miniature model effect)</li>
+                    <li><code>&lt;COLORTONE/CROSS_PROCESS&gt;</code> - Cross Process (unusual colors)</li>
+                    <li><code>&lt;COLORTONE/GENTLE_SEPIA&gt;</code> - Gentle Sepia (soft sepia tone)</li>
+                    <li><code>&lt;COLORTONE/DRAMATIC_TONE&gt;</code> - Dramatic Tone (high contrast detail)</li>
+                    <li><code>&lt;COLORTONE/LIGNE_CLAIR&gt;</code> - Key Line (simplified colors + outlines)</li>
+                    <li><code>&lt;COLORTONE/PASTEL&gt;</code> - Watercolor (soft pastels)</li>
+                    <li><code>&lt;COLORTONE/VINTAGE&gt;</code> - Vintage (aged photograph)</li>
+                    <li><code>&lt;COLORTONE/PARTCOLOR&gt;</code> - Partial Color (selective color)</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>Note:</strong> <code>SOFT</code> is NOT a valid COLORTONE value. Properties like <code>CONTRAST_SOFT</code>, <code>SHARP_SOFT</code>, <code>SATURATION_LEVEL_SOFT</code>, and <code>TONE_SOFT</code> exist in the API but do not correspond to any actual picture mode and appear to be legacy/unused.
+                </div>
+            </div>
+
+            <div class="detail-section" id="art-detail">
+                <h2>Art Filters</h2>
+                <p>Art filters are available in TAKEMODE=ART. Set <code>RECENTLY_ART_FILTER</code> to select which filter to use.</p>
+
+                <p>Each filter supports:</p>
+                <ol>
+                    <li><strong>Type variations</strong> - <code>ART_EFFECT_TYPE_[FILTER]</code> (TYPE1, TYPE2, TYPE3, etc.)</li>
+                    <li><strong>Hybrid effects</strong> - <code>ART_EFFECT_HYBRID_[FILTER]</code> (combine multiple effects)</li>
+                </ol>
+
+                <h3>Art Bracket Mode</h3>
+                <ul>
+                    <li>Set <code>RECENTLY_ART_FILTER</code> to <code>ART_BKT</code></li>
+                    <li>Enable desired filters using <code>BRACKET_PICT_*</code> properties</li>
+                    <li>One shutter press captures multiple images with different filters</li>
+                </ul>
+
+                <div class="example-box">
+                    <pre>&lt;RECENTLY_ART_FILTER/ART_BKT&gt;
+&lt;BRACKET_PICT_DRAMATIC_TONE/ON&gt;
+&lt;BRACKET_PICT_VINTAGE/ON&gt;
+&lt;BRACKET_PICT_ROUGH_MONOCHROME/ON&gt;
+&lt;BRACKET_PICT_TOY_PHOTO/ON&gt;
+&lt;BRACKET_PICT_PARTCOLOR/ON&gt;</pre>
+                </div>
+            </div>
+
+            <div class="detail-section" id="hybrid-detail">
+                <h2>Art Filter Hybrid Effects</h2>
+                <p>Add secondary effects to art filters. Available hybrids vary by base filter.</p>
+
+                <h3>Common Hybrid Effects</h3>
+                <ul>
+                    <li><code>OFF</code> - No hybrid effect</li>
+                    <li><code>FANTASIC_FOCUS</code> - Add soft focus overlay</li>
+                    <li><code>TOY_PHOTO</code> - Add vignetting/darkened edges</li>
+                    <li><code>WHITE_EDGE</code> - Add white border edges</li>
+                    <li><code>FRAME_JAGGY</code> - Add jagged frame effect</li>
+                    <li><code>STARLIGHT</code> - Add star/sparkle effects to lights</li>
+                    <li><code>MINIATURE_VERTICAL</code> - Vertical selective blur (diorama effect)</li>
+                    <li><code>MINIATURE_HORIZON</code> - Horizontal selective blur (diorama effect)</li>
+                    <li><code>SHADING_HORIZON</code> - Horizontal shading (Vintage only)</li>
+                    <li><code>SHADING_VERTICAL</code> - Vertical shading (Vintage only)</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>Note:</strong> Not all hybrids are available for all filters. Query camera for filter-specific options.
+                </div>
+            </div>
+
+            <div class="detail-section" id="size-detail">
+                <h2>Image Size Details</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Resolution</th>
+                            <th>Megapixels</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/4608x3456&gt;</code></td>
+                            <td>4608 × 3456</td>
+                            <td>16 MP</td>
+                            <td>Maximum quality, large prints</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/3200x2400&gt;</code></td>
+                            <td>3200 × 2400</td>
+                            <td>7.7 MP</td>
+                            <td>High quality, medium prints</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/2560x1920&gt;</code></td>
+                            <td>2560 × 1920</td>
+                            <td>4.9 MP</td>
+                            <td>Medium quality, small prints</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/1920x1440&gt;</code></td>
+                            <td>1920 × 1440</td>
+                            <td>2.8 MP</td>
+                            <td>Web/sharing optimized</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/1280x960&gt;</code></td>
+                            <td>1280 × 960</td>
+                            <td>1.2 MP</td>
+                            <td>Web size</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/1024x768&gt;</code></td>
+                            <td>1024 × 768</td>
+                            <td>0.8 MP</td>
+                            <td>Email attachments</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;IMAGESIZE/640x480&gt;</code></td>
+                            <td>640 × 480</td>
+                            <td>0.3 MP</td>
+                            <td>Thumbnails</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><em>Smaller sizes enable faster burst shooting and more images per card.</em></p>
+            </div>
+
+            <div class="detail-section" id="lens-detail">
+                <h2>Lens Mount Status</h2>
+                <p>Read-only property indicating lens state and capabilities.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Description</th>
+                            <th>Actions Available</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>normal</code></td>
+                            <td>Lens mounted and ready</td>
+                            <td>All lens controls</td>
+                        </tr>
+                        <tr>
+                            <td><code>normal+electriczoom</code></td>
+                            <td>Lens with motorized zoom</td>
+                            <td>All controls + electric zoom</td>
+                        </tr>
+                        <tr>
+                            <td><code>normal+macro</code></td>
+                            <td>Lens with macro mode switch</td>
+                            <td>All controls + macro mode</td>
+                        </tr>
+                        <tr>
+                            <td><code>down</code></td>
+                            <td>Retractable lens not extended</td>
+                            <td>Extend lens before shooting</td>
+                        </tr>
+                        <tr>
+                            <td><code>nolens</code></td>
+                            <td>No lens mounted</td>
+                            <td>Cannot capture (attach lens)</td>
+                        </tr>
+                        <tr>
+                            <td><code>cantshoot</code></td>
+                            <td>Lens error</td>
+                            <td>Check lens mounting</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <strong>Check before:</strong> Setting APERTURE (requires electronic aperture lens) or using motorized zoom (requires <code>+electriczoom</code>).
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h2>Quick Configuration Examples</h2>
+
+                <h3>Manual Exposure (Full Control)</h3>
+                <div class="example-box">
+                    <pre>&lt;TAKEMODE/M&gt;
+&lt;APERTURE/8.0&gt;
+&lt;SHUTTER/125&gt;
+&lt;ISO/400&gt;</pre>
+                </div>
+
+                <h3>HDR Bracketing</h3>
+                <div class="example-box">
+                    <pre>&lt;TAKEMODE/A&gt;
+&lt;APERTURE/16&gt;
+&lt;AutoBracketingMode&gt;1&lt;/AutoBracketingMode&gt;
+&lt;AutoBracketingCount&gt;7&lt;/AutoBracketingCount&gt;
+&lt;AutoBracketingStep&gt;2&lt;/AutoBracketingStep&gt;</pre>
+                </div>
+
+                <h3>Black & White Photography</h3>
+                <div class="example-box">
+                    <pre>&lt;TAKEMODE/P&gt;
+&lt;COLORTONE/Monotone&gt;
+&lt;CONTRAST_MONOCHROME/+2&gt;
+&lt;SHARP_MONOCHROME/+1&gt;
+&lt;MONOTONEFILTER_MONOCHROME/ORANGE&gt;
+&lt;MONOTONECOLOR_MONOCHROME/NORMAL&gt;</pre>
+                </div>
+
+                <h3>High-Speed Continuous Shooting</h3>
+                <div class="example-box">
+                    <pre>&lt;TAKEMODE/S&gt;
+&lt;SHUTTER/1000&gt;
+&lt;TAKE_DRIVE/DRIVE_CONTINUE&gt;
+&lt;CONTINUOUS_SHOOTING_VELOCITY/10&gt;
+&lt;RECVIEW/OFF&gt;</pre>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h2>HTTP API Usage</h2>
+                <p><strong>Base URL:</strong> <code>http://192.168.0.10</code></p>
+
+                <h3>Required Headers</h3>
+                <div class="example-box">
+                    <pre>Host: 192.168.0.10
+User-Agent: OlympusCameraKit
+Connection: close</pre>
+                </div>
+
+                <h3>Common Endpoints</h3>
+                <ul>
+                    <li><strong>Get Property Details:</strong> <code>GET /get_camprop.cgi?com=desc&propname=TAKEMODE</code></li>
+                    <li><strong>Get Current Value:</strong> <code>GET /get_camprop.cgi?com=get&propname=TAKEMODE</code></li>
+                    <li><strong>Set Property:</strong> <code>GET /set_camprop.cgi?com=set&propname=TAKEMODE&propval=&lt;TAKEMODE/A&gt;</code></li>
+                    <li><strong>List All Properties:</strong> <code>GET /get_camprop.cgi?com=desc&propname=desclist</code></li>
+                    <li><strong>Get Camera State:</strong> <code>GET /get_state.cgi</code></li>
+                </ul>
+            </div>
+
+            <div class="detail-section">
+                <h2>Resources</h2>
+                <div class="quick-links">
+                    <a href="Olympus_Air_A01_Capabilities.md" class="quick-link">📖 Complete API Reference</a>
+                    <a href="CLAUDE.md" class="quick-link">💻 SDK Development Guide</a>
+                    <a href="README_INSPECTOR.md" class="quick-link">🔧 Python Tools Guide</a>
+                    <a href="Favorites/" class="quick-link">⭐ Sample Configurations</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Document Version:</strong> 1.0 | <strong>Date:</strong> February 21, 2026</p>
+            <p>Olympus Camera Kit SDK - Comprehensive Configuration Reference</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const table = document.getElementById('propsTable');
+        const rows = table.querySelectorAll('tbody tr:not(.category-row)');
+        const categoryRows = table.querySelectorAll('.category-row');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+
+        searchInput.addEventListener('input', filterTable);
+
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const matchesSearch = text.includes(searchTerm);
+                const matchesFilter = applyFilter(row);
+
+                if (matchesSearch && matchesFilter) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+
+            // Hide category rows if all their properties are hidden
+            categoryRows.forEach(categoryRow => {
+                let nextRow = categoryRow.nextElementSibling;
+                let hasVisibleRows = false;
+
+                while (nextRow && !nextRow.classList.contains('category-row')) {
+                    if (!nextRow.classList.contains('hidden')) {
+                        hasVisibleRows = true;
+                        break;
+                    }
+                    nextRow = nextRow.nextElementSibling;
+                }
+
+                if (hasVisibleRows) {
+                    categoryRow.classList.remove('hidden');
+                } else {
+                    categoryRow.classList.add('hidden');
+                }
+            });
+        }
+
+        function applyFilter(row) {
+            if (currentFilter === 'all') return true;
+
+            const category = row.dataset.category;
+            const required = row.dataset.required;
+
+            switch (currentFilter) {
+                case 'required':
+                    return required === 'y';
+                case 'optional':
+                    return required === 'n' || required === 'nc';
+                case 'exposure':
+                    return category === 'exposure';
+                case 'focus':
+                    return category === 'focus';
+                case 'art':
+                    return category === 'art';
+                default:
+                    return true;
+            }
+        }
+
+        // Filter buttons
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                filterTable();
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympus Air A01 Configuration Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #4a4a4a;
+            --accent: #0066cc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6a6a6a;
+            --border: #e5e5e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-primary);
+            color: var(--primary);
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        header .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 500px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .form-panel {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 2rem;
+        }
+
+        .output-panel {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 2rem;
+            position: sticky;
+            top: 20px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.3px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            letter-spacing: 0.2px;
+        }
+
+        label .required {
+            color: var(--danger);
+        }
+
+        label .conditional {
+            color: var(--warning);
+            font-size: 0.875rem;
+            font-weight: normal;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            font-size: 1rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.05);
+        }
+
+        input:disabled, select:disabled, textarea:disabled {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .help-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .warning-box {
+            background: var(--bg-secondary);
+            border-left: 2px solid var(--warning);
+            padding: 1rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            border-left: 2px solid var(--accent);
+            padding: 1rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        .lens-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .lens-info dt {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .lens-info dd {
+            margin-left: 0;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+
+        .checkbox-item label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-item input[type="radio"] {
+            width: auto;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 2px;
+            font-size: 0.95rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: 0.2px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--primary);
+        }
+
+        #outputArea {
+            width: 100%;
+            min-height: 400px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.85rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 1rem;
+            line-height: 1.5;
+        }
+
+        .output-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-success {
+            background: var(--bg-secondary);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .badge-warning {
+            background: var(--bg-secondary);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .badge-danger {
+            background: var(--bg-secondary);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .range-input {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .range-input input[type="range"] {
+            flex: 1;
+        }
+
+        .range-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .output-panel {
+                position: static;
+                max-height: none;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .subsection {
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--border);
+            margin-top: 1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logoAirA01.png" alt="Olympus Air" class="logo">
+            <div class="header-content">
+                <h1>Configuration Builder</h1>
+                <p>Create custom camera configurations with lens-aware restrictions and dependency validation</p>
+            </div>
+        </header>
+
+        <div class="main-grid">
+            <!-- Form Panel -->
+            <div class="form-panel">
+                <form id="configForm">
+                    <!-- Configuration Name -->
+                    <div class="section">
+                        <h2 class="section-title">Configuration Details</h2>
+                        <div class="form-group">
+                            <label>Configuration Name <span class="required">*</span></label>
+                            <input type="text" id="configName" placeholder="e.g., Street Photography B&W" required>
+                            <div class="help-text">Give your configuration a descriptive name</div>
+                        </div>
+                    </div>
+
+                    <!-- Lens Selection -->
+                    <div class="section">
+                        <h2 class="section-title">Lens Selection</h2>
+                        <div class="form-group">
+                            <label>Select Lens <span class="required">*</span></label>
+                            <select id="lensSelect" required>
+                                <option value="">-- Select a Lens --</option>
+                                <optgroup label="Olympus Primes">
+                                    <option value="oly_17mm_f18">Olympus 17mm f/1.8</option>
+                                    <option value="oly_25mm_f18">Olympus 25mm f/1.8</option>
+                                    <option value="oly_45mm_f18">Olympus 45mm f/1.8</option>
+                                    <option value="oly_75mm_f18">Olympus 75mm f/1.8</option>
+                                    <option value="oly_12mm_f20">Olympus 12mm f/2.0</option>
+                                    <option value="oly_60mm_f28_macro">Olympus 60mm f/2.8 Macro</option>
+                                </optgroup>
+                                <optgroup label="Olympus Zooms">
+                                    <option value="oly_14-42mm_ez">Olympus 14-42mm f/3.5-5.6 EZ (Motorized)</option>
+                                    <option value="oly_12-40mm_f28_pro">Olympus 12-40mm f/2.8 PRO</option>
+                                    <option value="oly_40-150mm_f40-56">Olympus 40-150mm f/4.0-5.6</option>
+                                    <option value="oly_14-150mm_f40-56">Olympus 14-150mm f/4.0-5.6</option>
+                                </optgroup>
+                                <optgroup label="Panasonic Primes">
+                                    <option value="pana_20mm_f17">Panasonic 20mm f/1.7</option>
+                                    <option value="pana_25mm_f14">Panasonic 25mm f/1.4</option>
+                                    <option value="pana_42.5mm_f17">Panasonic 42.5mm f/1.7</option>
+                                    <option value="pana_15mm_f17">Panasonic 15mm f/1.7</option>
+                                </optgroup>
+                                <optgroup label="Panasonic Zooms">
+                                    <option value="pana_12-35mm_f28">Panasonic 12-35mm f/2.8</option>
+                                    <option value="pana_14-42mm_pz">Panasonic 14-42mm f/3.5-5.6 PZ (Motorized)</option>
+                                    <option value="pana_45-150mm_f40-56">Panasonic 45-150mm f/4.0-5.6</option>
+                                </optgroup>
+                                <optgroup label="Sigma (Autofocus)">
+                                    <option value="sigma_16mm_f14">Sigma 16mm f/1.4 DC DN Contemporary</option>
+                                    <option value="sigma_30mm_f14">Sigma 30mm f/1.4 DC DN Contemporary</option>
+                                    <option value="sigma_56mm_f14">Sigma 56mm f/1.4 DC DN Contemporary</option>
+                                </optgroup>
+                                <optgroup label="7artisans (Manual Focus)">
+                                    <option value="7art_4mm_f28">7artisans 4mm f/2.8 Fisheye</option>
+                                    <option value="7art_6mm_f20">7artisans 6mm f/2.0</option>
+                                    <option value="7art_75mm_f28">7artisans 7.5mm f/2.8 Fisheye</option>
+                                    <option value="7art_10mm_f35">7artisans 10mm f/3.5</option>
+                                    <option value="7art_18mm_f63">7artisans 18mm f/6.3 (Pancake)</option>
+                                    <option value="7art_24mm_f14">7artisans 24mm f/1.4</option>
+                                    <option value="7art_25mm_f18">7artisans 25mm f/1.8</option>
+                                    <option value="7art_35mm_f12">7artisans 35mm f/1.2</option>
+                                    <option value="7art_35mm_f14">7artisans 35mm f/1.4</option>
+                                    <option value="7art_50mm_f095">7artisans 50mm f/0.95</option>
+                                    <option value="7art_50mm_f12">7artisans 50mm f/1.2</option>
+                                    <option value="7art_50mm_f14_ts">7artisans 50mm f/1.4 Tilt-Shift</option>
+                                    <option value="7art_50mm_f18">7artisans 50mm f/1.8</option>
+                                    <option value="7art_55mm_f14">7artisans 55mm f/1.4</option>
+                                    <option value="7art_60mm_f28_macro">7artisans 60mm f/2.8 Macro</option>
+                                </optgroup>
+                                <optgroup label="Samyang/Rokinon (Manual Focus)">
+                                    <option value="samyang_75mm_f35">Samyang 7.5mm f/3.5 Fisheye</option>
+                                    <option value="samyang_24mm_f35_ts">Samyang 24mm f/3.5 Tilt-Shift</option>
+                                    <option value="samyang_85mm_f14">Samyang 85mm f/1.4</option>
+                                    <option value="samyang_135mm_f20">Samyang 135mm f/2.0</option>
+                                </optgroup>
+                                <optgroup label="Voigtländer (Manual Focus)">
+                                    <option value="voigt_105mm_f095">Voigtländer 10.5mm f/0.95 Nokton</option>
+                                    <option value="voigt_175mm_f095">Voigtländer 17.5mm f/0.95 Nokton</option>
+                                    <option value="voigt_25mm_f095">Voigtländer 25mm f/0.95 Nokton</option>
+                                    <option value="voigt_29mm_f08">Voigtländer 29mm f/0.8 Super Nokton</option>
+                                    <option value="voigt_425mm_f095">Voigtländer 42.5mm f/0.95 Nokton</option>
+                                    <option value="voigt_60mm_f095">Voigtländer 60mm f/0.95 Nokton</option>
+                                </optgroup>
+                                <optgroup label="Laowa (Manual Focus)">
+                                    <option value="laowa_4mm_f28">Laowa 4mm f/2.8 Circular Fisheye</option>
+                                    <option value="laowa_75mm_f20">Laowa 7.5mm f/2.0</option>
+                                    <option value="laowa_9mm_f28">Laowa 9mm f/2.8 Zero-D</option>
+                                    <option value="laowa_10mm_f20">Laowa 10mm f/2.0 Zero-D</option>
+                                    <option value="laowa_17mm_f18">Laowa 17mm f/1.8</option>
+                                    <option value="laowa_50mm_f28_macro">Laowa 50mm f/2.8 2X Ultra Macro</option>
+                                </optgroup>
+                                <optgroup label="Meike (Manual Focus)">
+                                    <option value="meike_35mm_f14">Meike 3.5mm f/2.8 Fisheye</option>
+                                    <option value="meike_6mm_f20">Meike 6.5mm f/2.0</option>
+                                    <option value="meike_8mm_f35">Meike 8mm f/3.5 Fisheye</option>
+                                    <option value="meike_12mm_f28">Meike 12mm f/2.8</option>
+                                    <option value="meike_25mm_f18">Meike 25mm f/1.8</option>
+                                    <option value="meike_35mm_f17">Meike 35mm f/1.7</option>
+                                    <option value="meike_50mm_f17">Meike 50mm f/1.7</option>
+                                </optgroup>
+                                <optgroup label="Other Manual Focus">
+                                    <option value="bodycap_15mm_f80">Olympus Body Cap 15mm f/8.0</option>
+                                </optgroup>
+                            </select>
+                            <div id="lensInfo" class="lens-info" style="display: none;">
+                                <dl id="lensDetails"></dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core Shooting Mode -->
+                    <div class="section">
+                        <h2 class="section-title">Shooting Mode</h2>
+                        <div class="form-group">
+                            <label>TAKEMODE <span class="required">*</span></label>
+                            <select id="takemode" required>
+                                <option value="">-- Select Mode --</option>
+                                <option value="iAuto">iAuto - Intelligent Auto</option>
+                                <option value="P">P - Program</option>
+                                <option value="A">A - Aperture Priority</option>
+                                <option value="S">S - Shutter Priority</option>
+                                <option value="M">M - Manual</option>
+                                <option value="ART">ART - Art Filter</option>
+                                <option value="movie">movie - Video Recording</option>
+                            </select>
+                            <div class="help-text">Set shooting mode first - affects available options</div>
+                        </div>
+                    </div>
+
+                    <!-- Exposure Settings -->
+                    <div class="section">
+                        <h2 class="section-title">Exposure</h2>
+
+                        <div class="form-group">
+                            <label>APERTURE <span class="conditional" id="apertureReq">(Requires TAKEMODE=A/M)</span></label>
+                            <select id="aperture" disabled>
+                                <option value="">Auto</option>
+                            </select>
+                            <div class="help-text">Available apertures based on selected lens</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>SHUTTER <span class="conditional">(Requires TAKEMODE=S/M)</span></label>
+                            <select id="shutter" disabled>
+                                <option value="">Auto</option>
+                                <option value="4000">1/4000</option>
+                                <option value="3200">1/3200</option>
+                                <option value="2500">1/2500</option>
+                                <option value="2000">1/2000</option>
+                                <option value="1600">1/1600</option>
+                                <option value="1250">1/1250</option>
+                                <option value="1000">1/1000</option>
+                                <option value="800">1/800</option>
+                                <option value="640">1/640</option>
+                                <option value="500">1/500</option>
+                                <option value="400">1/400</option>
+                                <option value="320">1/320</option>
+                                <option value="250">1/250</option>
+                                <option value="200">1/200</option>
+                                <option value="160">1/160</option>
+                                <option value="125">1/125</option>
+                                <option value="100">1/100</option>
+                                <option value="80">1/80</option>
+                                <option value="60">1/60</option>
+                                <option value="50">1/50</option>
+                                <option value="40">1/40</option>
+                                <option value="30">1/30</option>
+                                <option value="25">1/25</option>
+                                <option value="20">1/20</option>
+                                <option value="15">1/15</option>
+                                <option value="13">1/13</option>
+                                <option value="10">1/10</option>
+                                <option value="8">1/8</option>
+                                <option value="6">1/6</option>
+                                <option value="5">1/5</option>
+                                <option value="4">1/4</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ISO</label>
+                            <select id="iso">
+                                <option value="Auto">Auto</option>
+                                <option value="100">ISO 100</option>
+                                <option value="200">ISO 200</option>
+                                <option value="400">ISO 400</option>
+                                <option value="800">ISO 800</option>
+                                <option value="1600">ISO 1600</option>
+                                <option value="3200">ISO 3200</option>
+                                <option value="6400">ISO 6400</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Exposure Compensation (EXPREV)</label>
+                            <select id="exprev" class="form-control">
+                                <option value="-5.0">-5.0 EV</option>
+                                <option value="-4.7">-4.7 EV</option>
+                                <option value="-4.3">-4.3 EV</option>
+                                <option value="-4.0">-4.0 EV</option>
+                                <option value="-3.7">-3.7 EV</option>
+                                <option value="-3.3">-3.3 EV</option>
+                                <option value="-3.0">-3.0 EV</option>
+                                <option value="-2.7">-2.7 EV</option>
+                                <option value="-2.3">-2.3 EV</option>
+                                <option value="-2.0">-2.0 EV</option>
+                                <option value="-1.7">-1.7 EV</option>
+                                <option value="-1.3">-1.3 EV</option>
+                                <option value="-1.0">-1.0 EV</option>
+                                <option value="-0.7">-0.7 EV</option>
+                                <option value="-0.3">-0.3 EV</option>
+                                <option value="0.0" selected>0.0 EV</option>
+                                <option value="0.3">+0.3 EV</option>
+                                <option value="0.7">+0.7 EV</option>
+                                <option value="1.0">+1.0 EV</option>
+                                <option value="1.3">+1.3 EV</option>
+                                <option value="1.7">+1.7 EV</option>
+                                <option value="2.0">+2.0 EV</option>
+                                <option value="2.3">+2.3 EV</option>
+                                <option value="2.7">+2.7 EV</option>
+                                <option value="3.0">+3.0 EV</option>
+                                <option value="3.3">+3.3 EV</option>
+                                <option value="3.7">+3.7 EV</option>
+                                <option value="4.0">+4.0 EV</option>
+                                <option value="4.3">+4.3 EV</option>
+                                <option value="4.7">+4.7 EV</option>
+                                <option value="5.0">+5.0 EV</option>
+                            </select>
+                            <div class="help-text">±5 EV in 1/3 stop increments</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Metering Mode (AE)</label>
+                            <select id="ae">
+                                <option value="AE_ESP">ESP - Multi-pattern</option>
+                                <option value="AE_CENTER">Center-weighted</option>
+                                <option value="AE_PINPOINT">Spot metering</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Focus Settings -->
+                    <div class="section">
+                        <h2 class="section-title">Focus</h2>
+
+                        <div class="form-group">
+                            <label>Focus Mode <span class="conditional" id="focusReq"></span></label>
+                            <select id="focusMode" disabled>
+                                <option value="FOCUS_SAF">Single AF (SAF)</option>
+                                <option value="FOCUS_CAF">Continuous AF (CAF)</option>
+                                <option value="FOCUS_MF">Manual Focus (MF)</option>
+                            </select>
+                            <div class="help-text">Autofocus options require AF lens</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Face Detection</label>
+                            <select id="faceScan">
+                                <option value="FACE_SCAN_OFF">Off</option>
+                                <option value="FACE_SCAN_ON" selected>On (up to 8 faces)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Full-time AF (in Live View)</label>
+                            <select id="fullTimeAF">
+                                <option value="OFF">Off</option>
+                                <option value="ON">On</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- White Balance -->
+                    <div class="section">
+                        <h2 class="section-title">White Balance</h2>
+
+                        <div class="form-group">
+                            <label>White Balance (WB)</label>
+                            <select id="wb">
+                                <option value="WB_AUTO">Auto</option>
+                                <option value="MWB_FINE">Daylight (5300K)</option>
+                                <option value="MWB_SHADE">Shade (7500K)</option>
+                                <option value="MWB_CLOUD">Cloudy (6000K)</option>
+                                <option value="MWB_LAMP">Tungsten (3000K)</option>
+                                <option value="MWB_FLUOR1">Fluorescent (4000K)</option>
+                                <option value="WB_CUSTOM1">Custom Kelvin Temperature</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="customWbKelvinGroup" style="display: none;">
+                            <label>Custom White Balance <span class="conditional">(requires WB=Custom)</span></label>
+                            <select id="customWbKelvin" disabled>
+                                <option value="">-- Select Temperature --</option>
+                                <optgroup label="2000K - 2800K (Warm Tungsten/Candlelight)">
+                                    <option value="2000">2000K</option>
+                                    <option value="2050">2050K</option>
+                                    <option value="2100">2100K</option>
+                                    <option value="2150">2150K</option>
+                                    <option value="2200">2200K</option>
+                                    <option value="2250">2250K</option>
+                                    <option value="2300">2300K</option>
+                                    <option value="2350">2350K</option>
+                                    <option value="2400">2400K</option>
+                                    <option value="2450">2450K</option>
+                                    <option value="2500">2500K</option>
+                                    <option value="2550">2550K</option>
+                                    <option value="2600">2600K</option>
+                                    <option value="2650">2650K</option>
+                                    <option value="2700">2700K</option>
+                                    <option value="2750">2750K</option>
+                                    <option value="2800">2800K</option>
+                                </optgroup>
+                                <optgroup label="2900K - 4000K (Tungsten Bulbs)">
+                                    <option value="2900">2900K</option>
+                                    <option value="3000">3000K</option>
+                                    <option value="3100">3100K</option>
+                                    <option value="3200">3200K</option>
+                                    <option value="3300">3300K</option>
+                                    <option value="3400">3400K</option>
+                                    <option value="3500">3500K</option>
+                                    <option value="3600">3600K</option>
+                                    <option value="3700">3700K</option>
+                                    <option value="3800">3800K</option>
+                                    <option value="3900">3900K</option>
+                                    <option value="4000">4000K</option>
+                                </optgroup>
+                                <optgroup label="4200K - 6000K (Fluorescent to Daylight)">
+                                    <option value="4200">4200K</option>
+                                    <option value="4400">4400K</option>
+                                    <option value="4600">4600K</option>
+                                    <option value="4800">4800K</option>
+                                    <option value="5000">5000K</option>
+                                    <option value="5200">5200K</option>
+                                    <option value="5400">5400K</option>
+                                    <option value="5600">5600K (Daylight)</option>
+                                    <option value="5800">5800K</option>
+                                    <option value="6000">6000K</option>
+                                </optgroup>
+                                <optgroup label="6200K - 7000K (Overcast/Shade)">
+                                    <option value="6200">6200K</option>
+                                    <option value="6400">6400K</option>
+                                    <option value="6600">6600K</option>
+                                    <option value="6800">6800K</option>
+                                    <option value="7000">7000K</option>
+                                </optgroup>
+                                <optgroup label="7400K - 9800K (Deep Shade/Twilight)">
+                                    <option value="7400">7400K</option>
+                                    <option value="7800">7800K</option>
+                                    <option value="8200">8200K</option>
+                                    <option value="8600">8600K</option>
+                                    <option value="9000">9000K</option>
+                                    <option value="9400">9400K</option>
+                                    <option value="9800">9800K</option>
+                                </optgroup>
+                                <optgroup label="10000K - 14000K (Deep Blue Sky)">
+                                    <option value="10000">10000K</option>
+                                    <option value="11000">11000K</option>
+                                    <option value="12000">12000K</option>
+                                    <option value="13000">13000K</option>
+                                    <option value="14000">14000K</option>
+                                </optgroup>
+                            </select>
+                            <div class="help-text">56 valid Kelvin temperature values from 2000K to 14000K</div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>WB Fine-tune (Amber-Blue)</label>
+                                <div class="range-input">
+                                    <input type="range" id="wbRev" min="-7" max="7" step="1" value="0">
+                                    <span class="range-value" id="wbRevValue">0</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>WB Fine-tune (Green-Magenta)</label>
+                                <div class="range-input">
+                                    <input type="range" id="wbRevG" min="-7" max="7" step="1" value="0">
+                                    <span class="range-value" id="wbRevGValue">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Picture Style -->
+                    <div class="section">
+                        <h2 class="section-title">Picture Style</h2>
+
+                        <div class="form-group">
+                            <label>Color Tone (COLORTONE)</label>
+                            <select id="colortone">
+                                <optgroup label="Basic Picture Modes">
+                                    <option value="NATURAL" selected>Natural</option>
+                                    <option value="VIVID">Vivid</option>
+                                    <option value="FLAT">Flat (Muted)</option>
+                                    <option value="Monotone">Monotone (B&W)</option>
+                                    <option value="I_FINISH">i-Finish (i-Enhance)</option>
+                                    <option value="Portrait">Portrait</option>
+                                    <option value="ePortrait">e-Portrait</option>
+                                    <option value="COLOR_CREATOR">Color Creator</option>
+                                </optgroup>
+                                <optgroup label="Art Filter Modes">
+                                    <option value="POPART">Pop Art</option>
+                                    <option value="FANTASIC_FOCUS">Soft Focus</option>
+                                    <option value="DAYDREAM">Pale & Light Color</option>
+                                    <option value="LIGHT_TONE">Light Tone</option>
+                                    <option value="ROUGH_MONOCHROME">Grainy Film</option>
+                                    <option value="TOY_PHOTO">Pin Hole</option>
+                                    <option value="MINIATURE">Diorama</option>
+                                    <option value="CROSS_PROCESS">Cross Process</option>
+                                    <option value="GENTLE_SEPIA">Gentle Sepia</option>
+                                    <option value="DRAMATIC_TONE">Dramatic Tone</option>
+                                    <option value="LIGNE_CLAIR">Key Line</option>
+                                    <option value="PASTEL">Watercolor</option>
+                                    <option value="VINTAGE">Vintage</option>
+                                    <option value="PARTCOLOR">Partial Color</option>
+                                </optgroup>
+                            </select>
+                            <div class="help-text">All 22 valid COLORTONE values from PlayOPC source code</div>
+                        </div>
+
+                        <div id="pictureAdjustments" class="subsection">
+                            <div class="form-group">
+                                <label>Contrast</label>
+                                <div class="range-input">
+                                    <input type="range" id="contrast" min="-5" max="5" step="1" value="0">
+                                    <span class="range-value" id="contrastValue">0</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sharpness</label>
+                                <div class="range-input">
+                                    <input type="range" id="sharp" min="-5" max="5" step="1" value="0">
+                                    <span class="range-value" id="sharpValue">0</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="saturationGroup">
+                                <label>Saturation</label>
+                                <div class="range-input">
+                                    <input type="range" id="saturation" min="-5" max="5" step="1" value="0">
+                                    <span class="range-value" id="saturationValue">0</span>
+                                </div>
+                            </div>
+
+                            <div id="monotoneControls" style="display: none;">
+                                <div class="form-group">
+                                    <label>B&W Filter</label>
+                                    <select id="monotoneFilter">
+                                        <option value="NORMAL">Normal</option>
+                                        <option value="YELLOW">Yellow</option>
+                                        <option value="ORANGE">Orange</option>
+                                        <option value="RED">Red</option>
+                                        <option value="GREEN">Green</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>B&W Toning</label>
+                                    <select id="monotoneColor">
+                                        <option value="NORMAL">Normal (Pure B&W)</option>
+                                        <option value="SEPIA">Sepia</option>
+                                        <option value="BLUE">Blue</option>
+                                        <option value="PURPLE">Purple</option>
+                                        <option value="GREEN">Green</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Art Filters -->
+                    <div class="section" id="artFilterSection" style="display: none;">
+                        <h2 class="section-title">Art Filters</h2>
+
+                        <div class="form-group">
+                            <label>Art Filter Mode</label>
+                            <select id="artFilterMode">
+                                <option value="single">Single Filter</option>
+                                <option value="bracket">Art Bracket (Multiple Filters)</option>
+                            </select>
+                            <div class="help-text">Single = one filter, Bracket = multiple filters per shot</div>
+                        </div>
+
+                        <!-- Single Art Filter -->
+                        <div id="singleArtFilter">
+                            <div class="form-group">
+                                <label>Art Filter Type</label>
+                                <select id="artFilter">
+                                    <option value="POPART">Pop Art</option>
+                                    <option value="FANTASIC_FOCUS">Soft Focus</option>
+                                    <option value="PASTEL">Pale & Light Color</option>
+                                    <option value="LIGHT_TONE">Light Tone</option>
+                                    <option value="ROUGH_MONOCHROME">Grainy Film</option>
+                                    <option value="TOY_PHOTO">Pin Hole</option>
+                                    <option value="MINIATURE">Diorama</option>
+                                    <option value="CROSS_PROCESS">Cross Process</option>
+                                    <option value="GENTLE_SEPIA">Gentle Sepia</option>
+                                    <option value="DRAMATIC_TONE">Dramatic Tone</option>
+                                    <option value="LIGNE_CLAIR">Ligne Clair</option>
+                                    <option value="DAYDREAM">Watercolor</option>
+                                    <option value="VINTAGE">Vintage</option>
+                                    <option value="PARTCOLOR">Partial Color</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Filter Variation</label>
+                                <select id="artEffectType">
+                                    <option value="TYPE1">Type 1</option>
+                                    <option value="TYPE2">Type 2</option>
+                                    <option value="TYPE3">Type 3</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Hybrid Effect</label>
+                                <select id="artHybrid">
+                                    <option value="OFF">Off - No hybrid effect</option>
+                                    <option value="FANTASIC_FOCUS">Soft Focus overlay</option>
+                                    <option value="TOY_PHOTO">Vignetting/darkened edges</option>
+                                    <option value="WHITE_EDGE">White border edges</option>
+                                    <option value="FRAME_JAGGY">Jagged frame effect</option>
+                                    <option value="STARLIGHT">Star/sparkle effects</option>
+                                    <option value="MINIATURE_VERTICAL">Vertical selective blur</option>
+                                    <option value="MINIATURE_HORIZON">Horizontal selective blur</option>
+                                </select>
+                                <div class="help-text">Add secondary effects to combine with base filter</div>
+                            </div>
+                        </div>
+
+                        <!-- Art Bracket -->
+                        <div id="artBracket" style="display: none;">
+                            <div class="info-box">
+                                <strong>Art Bracket Mode:</strong> One shutter press captures multiple images, each with a different art filter. Select which filters to include below.
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Art Filters to Include:</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_DRAMATIC_TONE" value="DRAMATIC_TONE">
+                                        <label for="bracket_DRAMATIC_TONE">Dramatic Tone</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_PARTCOLOR" value="PARTCOLOR">
+                                        <label for="bracket_PARTCOLOR">Partial Color</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_ROUGH_MONOCHROME" value="ROUGH_MONOCHROME">
+                                        <label for="bracket_ROUGH_MONOCHROME">Grainy Film</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_TOY_PHOTO" value="TOY_PHOTO">
+                                        <label for="bracket_TOY_PHOTO">Pin Hole</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_VINTAGE" value="VINTAGE">
+                                        <label for="bracket_VINTAGE">Vintage</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_CROSS_PROCESS" value="CROSS_PROCESS">
+                                        <label for="bracket_CROSS_PROCESS">Cross Process</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_DAYDREAM" value="DAYDREAM">
+                                        <label for="bracket_DAYDREAM">Watercolor</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_FANTASIC_FOCUS" value="FANTASIC_FOCUS">
+                                        <label for="bracket_FANTASIC_FOCUS">Soft Focus</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_GENTLE_SEPIA" value="GENTLE_SEPIA">
+                                        <label for="bracket_GENTLE_SEPIA">Gentle Sepia</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_LIGHT_TONE" value="LIGHT_TONE">
+                                        <label for="bracket_LIGHT_TONE">Light Tone</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_LIGNE_CLAIR" value="LIGNE_CLAIR">
+                                        <label for="bracket_LIGNE_CLAIR">Ligne Clair</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_MINIATURE" value="MINIATURE">
+                                        <label for="bracket_MINIATURE">Diorama</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_PASTEL" value="PASTEL">
+                                        <label for="bracket_PASTEL">Pale & Light</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="bracket_POPART" value="POPART">
+                                        <label for="bracket_POPART">Pop Art</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drive & Bracketing -->
+                    <div class="section">
+                        <h2 class="section-title">Drive & Bracketing</h2>
+
+                        <div class="form-group">
+                            <label>Drive Mode</label>
+                            <select id="takeDrive">
+                                <option value="DRIVE_NORMAL">Single Shot</option>
+                                <option value="DRIVE_CONTINUE">Continuous</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Continuous Shooting Speed <span class="conditional">(Requires Continuous mode)</span></label>
+                            <select id="continuousVelocity" disabled>
+                                <option value="5">5 fps</option>
+                                <option value="6">6 fps</option>
+                                <option value="7">7 fps</option>
+                                <option value="8">8 fps</option>
+                                <option value="9">9 fps</option>
+                                <option value="10">10 fps</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Auto Exposure Bracketing</label>
+                            <select id="bracketingMode">
+                                <option value="0">Off</option>
+                                <option value="1">On</option>
+                            </select>
+                        </div>
+
+                        <div id="bracketingSettings" style="display: none;">
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>Bracket Count</label>
+                                    <select id="bracketingCount">
+                                        <option value="3">3 shots</option>
+                                        <option value="5">5 shots</option>
+                                        <option value="7">7 shots</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Bracket Step</label>
+                                    <select id="bracketingStep">
+                                        <option value="1">1 EV</option>
+                                        <option value="2">2 EV</option>
+                                        <option value="3">3 EV</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Quality -->
+                    <div class="section">
+                        <h2 class="section-title">Image Quality</h2>
+
+                        <div class="form-group">
+                            <label>Image Size</label>
+                            <select id="imageSize">
+                                <option value="4608x3456">4608x3456 (16MP)</option>
+                                <option value="3200x2400">3200x2400 (7.7MP)</option>
+                                <option value="2560x1920">2560x1920 (4.9MP)</option>
+                                <option value="1920x1440">1920x1440 (2.8MP)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Aspect Ratio</label>
+                            <select id="aspectRatio">
+                                <option value="04_03">4:3 (Native)</option>
+                                <option value="03_02">3:2</option>
+                                <option value="16_09">16:9</option>
+                                <option value="01_01">1:1 (Square)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>RAW Format</label>
+                            <select id="raw">
+                                <option value="OFF">JPEG Only</option>
+                                <option value="ON">RAW + JPEG</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Other Settings -->
+                    <div class="section">
+                        <h2 class="section-title">Other Settings</h2>
+
+                        <div class="form-group">
+                            <label>Sound Volume</label>
+                            <select id="soundVolume">
+                                <option value="OFF">Off (Silent)</option>
+                                <option value="LOW">Low</option>
+                                <option value="MED">Medium</option>
+                                <option value="HIGH">High</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image Review</label>
+                            <select id="recview">
+                                <option value="ON">On</option>
+                                <option value="OFF">Off</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="output-panel">
+                <h2 class="section-title">Generated .plist File</h2>
+                <textarea id="outputArea" readonly placeholder="Configure settings and click 'Generate Configuration' to see the output..."></textarea>
+                <div class="output-actions">
+                    <button class="btn btn-primary" onclick="generatePlist()">Generate Configuration</button>
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lens database with detailed specifications
+        const lensDatabase = {
+            // Olympus Primes
+            oly_17mm_f18: {
+                name: 'Olympus 17mm f/1.8',
+                type: 'prime',
+                focalLength: 17,
+                maxAperture: 1.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            oly_25mm_f18: {
+                name: 'Olympus 25mm f/1.8',
+                type: 'prime',
+                focalLength: 25,
+                maxAperture: 1.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            oly_45mm_f18: {
+                name: 'Olympus 45mm f/1.8',
+                type: 'prime',
+                focalLength: 45,
+                maxAperture: 1.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            oly_75mm_f18: {
+                name: 'Olympus 75mm f/1.8',
+                type: 'prime',
+                focalLength: 75,
+                maxAperture: 1.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            oly_12mm_f20: {
+                name: 'Olympus 12mm f/2.0',
+                type: 'prime',
+                focalLength: 12,
+                maxAperture: 2.0,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            oly_60mm_f28_macro: {
+                name: 'Olympus 60mm f/2.8 Macro',
+                type: 'prime',
+                focalLength: 60,
+                maxAperture: 2.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            // Olympus Zooms
+            'oly_14-42mm_ez': {
+                name: 'Olympus 14-42mm f/3.5-5.6 EZ',
+                type: 'zoom',
+                focalLength: '14-42mm',
+                maxAperture: 3.5,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: true,
+                apertures: [3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            'oly_12-40mm_f28_pro': {
+                name: 'Olympus 12-40mm f/2.8 PRO',
+                type: 'zoom',
+                focalLength: '12-40mm',
+                maxAperture: 2.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            'oly_40-150mm_f40-56': {
+                name: 'Olympus 40-150mm f/4.0-5.6',
+                type: 'zoom',
+                focalLength: '40-150mm',
+                maxAperture: 4.0,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            'oly_14-150mm_f40-56': {
+                name: 'Olympus 14-150mm f/4.0-5.6',
+                type: 'zoom',
+                focalLength: '14-150mm',
+                maxAperture: 4.0,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            // Panasonic Primes
+            pana_20mm_f17: {
+                name: 'Panasonic 20mm f/1.7',
+                type: 'prime',
+                focalLength: 20,
+                maxAperture: 1.7,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.7, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            pana_25mm_f14: {
+                name: 'Panasonic 25mm f/1.4',
+                type: 'prime',
+                focalLength: 25,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            'pana_42.5mm_f17': {
+                name: 'Panasonic 42.5mm f/1.7',
+                type: 'prime',
+                focalLength: 42.5,
+                maxAperture: 1.7,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.7, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            pana_15mm_f17: {
+                name: 'Panasonic 15mm f/1.7',
+                type: 'prime',
+                focalLength: 15,
+                maxAperture: 1.7,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.7, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            // Panasonic Zooms
+            'pana_12-35mm_f28': {
+                name: 'Panasonic 12-35mm f/2.8',
+                type: 'zoom',
+                focalLength: '12-35mm',
+                maxAperture: 2.8,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            'pana_14-42mm_pz': {
+                name: 'Panasonic 14-42mm f/3.5-5.6 PZ',
+                type: 'zoom',
+                focalLength: '14-42mm',
+                maxAperture: 3.5,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: true,
+                apertures: [3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            'pana_45-150mm_f40-56': {
+                name: 'Panasonic 45-150mm f/4.0-5.6',
+                type: 'zoom',
+                focalLength: '45-150mm',
+                maxAperture: 4.0,
+                minAperture: 22,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            // Sigma (Autofocus)
+            sigma_16mm_f14: {
+                name: 'Sigma 16mm f/1.4 DC DN Contemporary',
+                type: 'prime',
+                focalLength: 16,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            sigma_30mm_f14: {
+                name: 'Sigma 30mm f/1.4 DC DN Contemporary',
+                type: 'prime',
+                focalLength: 30,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            sigma_56mm_f14: {
+                name: 'Sigma 56mm f/1.4 DC DN Contemporary',
+                type: 'prime',
+                focalLength: 56,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: true,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            // 7artisans (Manual Focus)
+            '7art_4mm_f28': {
+                name: '7artisans 4mm f/2.8 Fisheye',
+                type: 'prime',
+                focalLength: 4,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_6mm_f20': {
+                name: '7artisans 6mm f/2.0',
+                type: 'prime',
+                focalLength: 6,
+                maxAperture: 2.0,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_75mm_f28': {
+                name: '7artisans 7.5mm f/2.8 Fisheye',
+                type: 'prime',
+                focalLength: 7.5,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_10mm_f35': {
+                name: '7artisans 10mm f/3.5',
+                type: 'prime',
+                focalLength: 10,
+                maxAperture: 3.5,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_18mm_f63': {
+                name: '7artisans 18mm f/6.3',
+                type: 'prime',
+                focalLength: 18,
+                maxAperture: 6.3,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_24mm_f14': {
+                name: '7artisans 24mm f/1.4',
+                type: 'prime',
+                focalLength: 24,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_25mm_f18': {
+                name: '7artisans 25mm f/1.8',
+                type: 'prime',
+                focalLength: 25,
+                maxAperture: 1.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_35mm_f12': {
+                name: '7artisans 35mm f/1.2',
+                type: 'prime',
+                focalLength: 35,
+                maxAperture: 1.2,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_35mm_f14': {
+                name: '7artisans 35mm f/1.4',
+                type: 'prime',
+                focalLength: 35,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_50mm_f095': {
+                name: '7artisans 50mm f/0.95',
+                type: 'prime',
+                focalLength: 50,
+                maxAperture: 0.95,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_50mm_f12': {
+                name: '7artisans 50mm f/1.2',
+                type: 'prime',
+                focalLength: 50,
+                maxAperture: 1.2,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_50mm_f14_ts': {
+                name: '7artisans 50mm f/1.4 Tilt-Shift',
+                type: 'prime',
+                focalLength: 50,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_50mm_f18': {
+                name: '7artisans 50mm f/1.8',
+                type: 'prime',
+                focalLength: 50,
+                maxAperture: 1.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_55mm_f14': {
+                name: '7artisans 55mm f/1.4',
+                type: 'prime',
+                focalLength: 55,
+                maxAperture: 1.4,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            '7art_60mm_f28_macro': {
+                name: '7artisans 60mm f/2.8 Macro',
+                type: 'prime',
+                focalLength: 60,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            // Samyang/Rokinon (Manual Focus)
+            samyang_75mm_f35: {
+                name: 'Samyang 7.5mm f/3.5 Fisheye',
+                type: 'prime',
+                focalLength: 7.5,
+                maxAperture: 3.5,
+                minAperture: 22,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            samyang_24mm_f35_ts: {
+                name: 'Samyang 24mm f/3.5 Tilt-Shift',
+                type: 'prime',
+                focalLength: 24,
+                maxAperture: 3.5,
+                minAperture: 22,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            samyang_85mm_f14: {
+                name: 'Samyang 85mm f/1.4',
+                type: 'prime',
+                focalLength: 85,
+                maxAperture: 1.4,
+                minAperture: 22,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            samyang_135mm_f20: {
+                name: 'Samyang 135mm f/2.0',
+                type: 'prime',
+                focalLength: 135,
+                maxAperture: 2.0,
+                minAperture: 22,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16, 18, 20, 22]
+            },
+            // Voigtländer (Manual Focus)
+            voigt_105mm_f095: {
+                name: 'Voigtländer 10.5mm f/0.95 Nokton',
+                type: 'prime',
+                focalLength: 10.5,
+                maxAperture: 0.95,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            voigt_175mm_f095: {
+                name: 'Voigtländer 17.5mm f/0.95 Nokton',
+                type: 'prime',
+                focalLength: 17.5,
+                maxAperture: 0.95,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            voigt_25mm_f095: {
+                name: 'Voigtländer 25mm f/0.95 Nokton',
+                type: 'prime',
+                focalLength: 25,
+                maxAperture: 0.95,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            voigt_29mm_f08: {
+                name: 'Voigtländer 29mm f/0.8 Super Nokton',
+                type: 'prime',
+                focalLength: 29,
+                maxAperture: 0.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.8, 0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            voigt_425mm_f095: {
+                name: 'Voigtländer 42.5mm f/0.95 Nokton',
+                type: 'prime',
+                focalLength: 42.5,
+                maxAperture: 0.95,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            voigt_60mm_f095: {
+                name: 'Voigtländer 60mm f/0.95 Nokton',
+                type: 'prime',
+                focalLength: 60,
+                maxAperture: 0.95,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [0.95, 1.0, 1.1, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            // Laowa (Manual Focus)
+            laowa_4mm_f28: {
+                name: 'Laowa 4mm f/2.8 Circular Fisheye',
+                type: 'prime',
+                focalLength: 4,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            laowa_75mm_f20: {
+                name: 'Laowa 7.5mm f/2.0',
+                type: 'prime',
+                focalLength: 7.5,
+                maxAperture: 2.0,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            laowa_9mm_f28: {
+                name: 'Laowa 9mm f/2.8 Zero-D',
+                type: 'prime',
+                focalLength: 9,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            laowa_10mm_f20: {
+                name: 'Laowa 10mm f/2.0 Zero-D',
+                type: 'prime',
+                focalLength: 10,
+                maxAperture: 2.0,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            laowa_17mm_f18: {
+                name: 'Laowa 17mm f/1.8',
+                type: 'prime',
+                focalLength: 17,
+                maxAperture: 1.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            laowa_50mm_f28_macro: {
+                name: 'Laowa 50mm f/2.8 2X Ultra Macro',
+                type: 'prime',
+                focalLength: 50,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            // Meike (Manual Focus)
+            meike_35mm_f14: {
+                name: 'Meike 3.5mm f/2.8 Fisheye',
+                type: 'prime',
+                focalLength: 3.5,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            meike_6mm_f20: {
+                name: 'Meike 6.5mm f/2.0',
+                type: 'prime',
+                focalLength: 6.5,
+                maxAperture: 2.0,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            meike_8mm_f35: {
+                name: 'Meike 8mm f/3.5 Fisheye',
+                type: 'prime',
+                focalLength: 8,
+                maxAperture: 3.5,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            meike_12mm_f28: {
+                name: 'Meike 12mm f/2.8',
+                type: 'prime',
+                focalLength: 12,
+                maxAperture: 2.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            meike_25mm_f18: {
+                name: 'Meike 25mm f/1.8',
+                type: 'prime',
+                focalLength: 25,
+                maxAperture: 1.8,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            meike_35mm_f17: {
+                name: 'Meike 35mm f/1.7',
+                type: 'prime',
+                focalLength: 35,
+                maxAperture: 1.7,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.7, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            meike_50mm_f17: {
+                name: 'Meike 50mm f/1.7',
+                type: 'prime',
+                focalLength: 50,
+                maxAperture: 1.7,
+                minAperture: 16,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [1.7, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0, 4.5, 5.0, 5.6, 6.3, 7.1, 8.0, 9.0, 10, 11, 13, 14, 16]
+            },
+            // Other Manual Focus
+            bodycap_15mm_f80: {
+                name: 'Olympus Body Cap 15mm f/8.0',
+                type: 'prime',
+                focalLength: 15,
+                maxAperture: 8.0,
+                minAperture: 8.0,
+                hasAF: false,
+                hasMotorizedZoom: false,
+                apertures: [8.0]
+            }
+        };
+
+        let selectedLens = null;
+
+        // Initialize event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lens selection
+            document.getElementById('lensSelect').addEventListener('change', handleLensChange);
+
+            // Shooting mode
+            document.getElementById('takemode').addEventListener('change', handleTakemodeChange);
+
+            // Drive mode
+            document.getElementById('takeDrive').addEventListener('change', handleDriveModeChange);
+
+            // Bracketing
+            document.getElementById('bracketingMode').addEventListener('change', handleBracketingChange);
+
+            // Color tone
+            document.getElementById('colortone').addEventListener('change', handleColortoneChange);
+
+            // Art filter mode
+            document.getElementById('artFilterMode').addEventListener('change', handleArtFilterModeChange);
+
+            // White balance mode
+            document.getElementById('wb').addEventListener('change', handleWbChange);
+
+            // Range sliders
+            setupRangeSlider('wbRev', 'wbRevValue');
+            setupRangeSlider('wbRevG', 'wbRevGValue');
+            setupRangeSlider('contrast', 'contrastValue');
+            setupRangeSlider('sharp', 'sharpValue');
+            setupRangeSlider('saturation', 'saturationValue');
+        });
+
+        function handleLensChange(e) {
+            const lensId = e.target.value;
+            if (!lensId) {
+                document.getElementById('lensInfo').style.display = 'none';
+                selectedLens = null;
+                updateDependencies();
+                return;
+            }
+
+            selectedLens = lensDatabase[lensId];
+
+            // Display lens info
+            const lensDetails = document.getElementById('lensDetails');
+            lensDetails.innerHTML = `
+                <dt>Type:</dt><dd>${selectedLens.type === 'prime' ? 'Prime' : 'Zoom'}</dd>
+                <dt>Focal Length:</dt><dd>${selectedLens.focalLength}mm</dd>
+                <dt>Max Aperture:</dt><dd>f/${selectedLens.maxAperture}</dd>
+                <dt>Autofocus:</dt><dd>${selectedLens.hasAF ? '✅ Yes' : '❌ No (Manual Focus Only)'}</dd>
+                <dt>Motorized Zoom:</dt><dd>${selectedLens.hasMotorizedZoom ? '✅ Yes' : '❌ No'}</dd>
+            `;
+            document.getElementById('lensInfo').style.display = 'block';
+
+            // Update aperture options
+            const apertureSelect = document.getElementById('aperture');
+            apertureSelect.innerHTML = '<option value="">Auto</option>';
+            selectedLens.apertures.forEach(ap => {
+                apertureSelect.innerHTML += `<option value="${ap}">f/${ap}</option>`;
+            });
+
+            updateDependencies();
+        }
+
+        function handleTakemodeChange(e) {
+            updateDependencies();
+        }
+
+        function handleDriveModeChange(e) {
+            const continuousVelocity = document.getElementById('continuousVelocity');
+            if (e.target.value === 'DRIVE_CONTINUE') {
+                continuousVelocity.disabled = false;
+            } else {
+                continuousVelocity.disabled = true;
+            }
+        }
+
+        function handleBracketingChange(e) {
+            const bracketingSettings = document.getElementById('bracketingSettings');
+            if (e.target.value === '1') {
+                bracketingSettings.style.display = 'block';
+            } else {
+                bracketingSettings.style.display = 'none';
+            }
+        }
+
+        function handleColortoneChange(e) {
+            const monotoneControls = document.getElementById('monotoneControls');
+            const saturationGroup = document.getElementById('saturationGroup');
+
+            if (e.target.value === 'Monotone') {
+                monotoneControls.style.display = 'block';
+                saturationGroup.style.display = 'none';
+            } else {
+                monotoneControls.style.display = 'none';
+                saturationGroup.style.display = 'block';
+            }
+        }
+
+        function handleArtFilterModeChange(e) {
+            const singleArtFilter = document.getElementById('singleArtFilter');
+            const artBracket = document.getElementById('artBracket');
+
+            if (e.target.value === 'bracket') {
+                singleArtFilter.style.display = 'none';
+                artBracket.style.display = 'block';
+            } else {
+                singleArtFilter.style.display = 'block';
+                artBracket.style.display = 'none';
+            }
+        }
+
+        function handleWbChange(e) {
+            const customWbKelvinGroup = document.getElementById('customWbKelvinGroup');
+            const customWbKelvin = document.getElementById('customWbKelvin');
+
+            if (e.target.value === 'WB_CUSTOM1') {
+                // Show and enable custom Kelvin dropdown when WB_CUSTOM1 is selected
+                customWbKelvinGroup.style.display = 'block';
+                customWbKelvin.disabled = false;
+            } else {
+                // Hide and disable custom Kelvin dropdown for other WB modes
+                customWbKelvinGroup.style.display = 'none';
+                customWbKelvin.disabled = true;
+                customWbKelvin.value = ''; // Reset selection
+            }
+        }
+
+        function updateDependencies() {
+            const takemode = document.getElementById('takemode').value;
+            const aperture = document.getElementById('aperture');
+            const shutter = document.getElementById('shutter');
+            const focusMode = document.getElementById('focusMode');
+            const artFilterSection = document.getElementById('artFilterSection');
+
+            // Aperture control (requires TAKEMODE A or M, and lens with electronic aperture)
+            if ((takemode === 'A' || takemode === 'M') && selectedLens && selectedLens.hasAF) {
+                aperture.disabled = false;
+            } else {
+                aperture.disabled = true;
+                aperture.value = '';
+            }
+
+            // Shutter control (requires TAKEMODE S or M)
+            if (takemode === 'S' || takemode === 'M') {
+                shutter.disabled = false;
+            } else {
+                shutter.disabled = true;
+                shutter.value = '';
+            }
+
+            // Focus mode (requires AF lens for AF options)
+            if (selectedLens) {
+                if (selectedLens.hasAF) {
+                    focusMode.disabled = false;
+                    focusMode.innerHTML = `
+                        <option value="FOCUS_SAF">Single AF (SAF)</option>
+                        <option value="FOCUS_CAF">Continuous AF (CAF)</option>
+                        <option value="FOCUS_MF">Manual Focus (MF)</option>
+                    `;
+                    document.getElementById('focusReq').textContent = '';
+                } else {
+                    focusMode.disabled = false;
+                    focusMode.innerHTML = '<option value="FOCUS_MF">Manual Focus (MF)</option>';
+                    document.getElementById('focusReq').innerHTML = '<span class="warning-box">Manual focus lens - AF not available</span>';
+                }
+            } else {
+                focusMode.disabled = true;
+            }
+
+            // Art filter section (only for ART mode)
+            if (takemode === 'ART') {
+                artFilterSection.style.display = 'block';
+            } else {
+                artFilterSection.style.display = 'none';
+            }
+        }
+
+        function setupRangeSlider(inputId, valueId) {
+            const input = document.getElementById(inputId);
+            const value = document.getElementById(valueId);
+
+            input.addEventListener('input', function() {
+                value.textContent = this.value;
+            });
+        }
+
+        function generatePlist() {
+            const configName = document.getElementById('configName').value;
+            if (!configName) {
+                alert('Please enter a configuration name');
+                return;
+            }
+
+            if (!selectedLens) {
+                alert('Please select a lens');
+                return;
+            }
+
+            const takemode = document.getElementById('takemode').value;
+            if (!takemode) {
+                alert('Please select a shooting mode (TAKEMODE)');
+                return;
+            }
+
+            const config = {
+                name: configName,
+                TAKEMODE: takemode
+            };
+
+            // Exposure settings
+            const aperture = document.getElementById('aperture').value;
+            if (aperture && !document.getElementById('aperture').disabled) {
+                config.APERTURE = aperture;
+            }
+
+            const shutter = document.getElementById('shutter').value;
+            if (shutter && !document.getElementById('shutter').disabled) {
+                config.SHUTTER = shutter;
+            }
+
+            const iso = document.getElementById('iso').value;
+            if (iso !== 'Auto') {
+                config.ISO = iso;
+            }
+
+            const exprev = document.getElementById('exprev').value;
+            config.EXPREV = exprev;
+
+            const ae = document.getElementById('ae').value;
+            if (ae !== 'AE_ESP') {
+                config.AE = ae;
+            }
+
+            // Focus settings
+            if (selectedLens) {
+                const focusMode = document.getElementById('focusMode').value;
+                if (takemode === 'movie') {
+                    config.FOCUS_MOVIE = focusMode;
+                } else {
+                    config.FOCUS_STILL = focusMode;
+                }
+            }
+
+            const faceScan = document.getElementById('faceScan').value;
+            if (faceScan !== 'FACE_SCAN_OFF') {
+                config.FACE_SCAN = faceScan;
+            }
+
+            const fullTimeAF = document.getElementById('fullTimeAF').value;
+            if (fullTimeAF !== 'OFF') {
+                config.FULL_TIME_AF = fullTimeAF;
+            }
+
+            // White balance
+            const wb = document.getElementById('wb').value;
+            if (wb !== 'WB_AUTO') {
+                config.WB = wb;
+            }
+
+            // Custom white balance Kelvin temperature (only if WB_CUSTOM1 is selected)
+            if (wb === 'WB_CUSTOM1') {
+                const customWbKelvin = document.getElementById('customWbKelvin').value;
+                if (customWbKelvin) {
+                    config.CUSTOM_WB_KELVIN_1 = customWbKelvin;
+                }
+            }
+
+            const wbRev = document.getElementById('wbRev').value;
+            if (wbRev !== '0') {
+                const wbProp = getWBRevProperty(wb);
+                if (wbProp) {  // Only add if not null (custom WB doesn't support fine-tuning)
+                    config[wbProp] = wbRev;
+                }
+            }
+
+            const wbRevG = document.getElementById('wbRevG').value;
+            if (wbRevG !== '0') {
+                const wbPropG = getWBRevGProperty(wb);
+                if (wbPropG) {  // Only add if not null (custom WB doesn't support fine-tuning)
+                    config[wbPropG] = wbRevG;
+                }
+            }
+
+            // Picture style
+            const colortone = document.getElementById('colortone').value;
+            if (colortone !== 'NATURAL') {
+                config.COLORTONE = colortone;
+            }
+
+            const contrast = document.getElementById('contrast').value;
+            if (contrast !== '0') {
+                config['CONTRAST_' + colortone] = contrast;
+            }
+
+            const sharp = document.getElementById('sharp').value;
+            if (sharp !== '0') {
+                config['SHARP_' + colortone] = sharp;
+            }
+
+            if (colortone !== 'Monotone') {
+                const saturation = document.getElementById('saturation').value;
+                if (saturation !== '0') {
+                    config['SATURATION_LEVEL_' + colortone] = saturation;
+                }
+            }
+
+            if (colortone === 'Monotone') {
+                const monotoneFilter = document.getElementById('monotoneFilter').value;
+                if (monotoneFilter !== 'NORMAL') {
+                    config.MONOTONEFILTER_MONOCHROME = monotoneFilter;
+                }
+
+                const monotoneColor = document.getElementById('monotoneColor').value;
+                if (monotoneColor !== 'NORMAL') {
+                    config.MONOTONECOLOR_MONOCHROME = monotoneColor;
+                }
+            }
+
+            // Art filters
+            if (takemode === 'ART') {
+                const artFilterMode = document.getElementById('artFilterMode').value;
+
+                if (artFilterMode === 'bracket') {
+                    // Art Bracket mode
+                    config.RECENTLY_ART_FILTER = 'ART_BKT';
+
+                    // Add ALL bracket filters (ON or OFF based on checkbox state)
+                    const bracketFilters = [
+                        'DRAMATIC_TONE', 'PARTCOLOR', 'ROUGH_MONOCHROME', 'TOY_PHOTO',
+                        'VINTAGE', 'CROSS_PROCESS', 'DAYDREAM', 'FANTASIC_FOCUS',
+                        'GENTLE_SEPIA', 'LIGHT_TONE', 'LIGNE_CLAIR', 'MINIATURE',
+                        'PASTEL', 'POPART'
+                    ];
+
+                    bracketFilters.forEach(filter => {
+                        const checkbox = document.getElementById('bracket_' + filter);
+                        const isChecked = checkbox && checkbox.checked;
+                        config['BRACKET_PICT_' + filter] = isChecked ? 'ON' : 'OFF';
+                    });
+                } else {
+                    // Single art filter mode
+                    const artFilter = document.getElementById('artFilter').value;
+                    config.RECENTLY_ART_FILTER = artFilter;
+
+                    const artEffectType = document.getElementById('artEffectType').value;
+                    config['ART_EFFECT_TYPE_' + artFilter] = artEffectType;
+
+                    const artHybrid = document.getElementById('artHybrid').value;
+                    if (artHybrid !== 'OFF') {
+                        config['ART_EFFECT_HYBRID_' + artFilter] = artHybrid;
+                    }
+                }
+            }
+
+            // Drive and bracketing
+            const takeDrive = document.getElementById('takeDrive').value;
+            if (takeDrive !== 'DRIVE_NORMAL') {
+                config.TAKE_DRIVE = takeDrive;
+
+                const continuousVelocity = document.getElementById('continuousVelocity').value;
+                config.CONTINUOUS_SHOOTING_VELOCITY = continuousVelocity;
+            }
+
+            const bracketingMode = document.getElementById('bracketingMode').value;
+            if (bracketingMode === '1') {
+                config.AutoBracketingMode = bracketingMode;
+                config.AutoBracketingCount = document.getElementById('bracketingCount').value;
+                config.AutoBracketingStep = document.getElementById('bracketingStep').value;
+            }
+
+            // Image quality
+            const imageSize = document.getElementById('imageSize').value;
+            if (imageSize !== '4608x3456') {
+                config.IMAGESIZE = imageSize;
+            }
+
+            const aspectRatio = document.getElementById('aspectRatio').value;
+            if (aspectRatio !== '04_03') {
+                config.ASPECT_RATIO = aspectRatio;
+            }
+
+            const raw = document.getElementById('raw').value;
+            if (raw !== 'OFF') {
+                config.RAW = raw;
+            }
+
+            // Other settings
+            const soundVolume = document.getElementById('soundVolume').value;
+            if (soundVolume !== 'MED') {
+                config.SOUND_VOLUME_LEVEL = soundVolume;
+            }
+
+            const recview = document.getElementById('recview').value;
+            if (recview !== 'ON') {
+                config.RECVIEW = recview;
+            }
+
+            // Generate plist XML
+            const plist = generatePlistXML(config);
+            document.getElementById('outputArea').value = plist;
+        }
+
+        function getWBRevProperty(wb) {
+            const map = {
+                'WB_AUTO': 'WB_REV_AUTO',
+                'MWB_FINE': 'WB_REV_5300K',
+                'MWB_SHADE': 'WB_REV_7500K',
+                'MWB_CLOUD': 'WB_REV_6000K',
+                'MWB_LAMP': 'WB_REV_3000K',
+                'MWB_FLUOR1': 'WB_REV_4000K',
+                'WB_CUSTOM1': null  // Custom WB uses Kelvin temperature, no fine-tuning
+            };
+            return map[wb] || 'WB_REV_AUTO';
+        }
+
+        function getWBRevGProperty(wb) {
+            const map = {
+                'WB_AUTO': 'WB_REV_G_AUTO',
+                'MWB_FINE': 'WB_REV_G_5300K',
+                'MWB_SHADE': 'WB_REV_G_7500K',
+                'MWB_CLOUD': 'WB_REV_G_6000K',
+                'MWB_LAMP': 'WB_REV_G_3000K',
+                'MWB_FLUOR1': 'WB_REV_G_4000K',
+                'WB_CUSTOM1': null  // Custom WB uses Kelvin temperature, no fine-tuning
+            };
+            return map[wb] || 'WB_REV_G_AUTO';
+        }
+
+        function generatePlistXML(config) {
+            let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+            xml += '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n';
+            xml += '<plist version="1.0">\n';
+            xml += '<dict>\n';
+
+            // Configuration name
+            xml += '\t<key>FavoriteSettingName</key>\n';
+            xml += `\t<string>${escapeXml(config.name)}</string>\n`;
+
+            // FavoriteSettingSnapshot wrapper
+            xml += '\t<key>FavoriteSettingSnapshot</key>\n';
+            xml += '\t<dict>\n';
+
+            // Auto Bracketing settings (metadata)
+            const autoBracketingCount = config.AutoBracketingCount || 3;
+            const autoBracketingMode = config.AutoBracketingMode || 0;
+            const autoBracketingStep = config.AutoBracketingStep || 1;
+
+            xml += '\t\t<key>AutoBracketingCount</key>\n';
+            xml += `\t\t<integer>${autoBracketingCount}</integer>\n`;
+            xml += '\t\t<key>AutoBracketingMode</key>\n';
+            xml += `\t\t<integer>${autoBracketingMode}</integer>\n`;
+            xml += '\t\t<key>AutoBracketingStep</key>\n';
+            xml += `\t\t<integer>${autoBracketingStep}</integer>\n`;
+
+            // Format version
+            xml += '\t\t<key>FormatVersion</key>\n';
+            xml += '\t\t<string>1.0</string>\n';
+
+            // Interval Timer settings (defaults)
+            xml += '\t\t<key>IntervalTimerCount</key>\n';
+            xml += '\t\t<integer>3</integer>\n';
+            xml += '\t\t<key>IntervalTimerMode</key>\n';
+            xml += '\t\t<integer>0</integer>\n';
+            xml += '\t\t<key>IntervalTimerTime</key>\n';
+            xml += '\t\t<real>1</real>\n';
+
+            // Live View settings
+            xml += '\t\t<key>LiveViewSize</key>\n';
+            xml += '\t\t<string>{1024, 768}</string>\n';
+            xml += '\t\t<key>MagnifyingLiveViewScale</key>\n';
+            xml += '\t\t<integer>0</integer>\n';
+
+            // Camera properties
+            xml += '\t\t<key>PropertyValues</key>\n';
+            xml += '\t\t<dict>\n';
+
+            // Metadata fields that shouldn't be in PropertyValues
+            const metadataFields = ['name', 'AutoBracketingCount', 'AutoBracketingMode', 'AutoBracketingStep'];
+
+            for (const [key, value] of Object.entries(config)) {
+                if (metadataFields.includes(key)) continue;
+
+                xml += `\t\t\t<key>${key}</key>\n`;
+                xml += `\t\t\t<string>&lt;${key}/${value}&gt;</string>\n`;
+            }
+
+            xml += '\t\t</dict>\n';
+            xml += '\t</dict>\n';
+            xml += '</dict>\n';
+            xml += '</plist>';
+
+            return xml;
+        }
+
+        function escapeXml(str) {
+            return str.replace(/[<>&'"]/g, function(c) {
+                switch (c) {
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '&': return '&amp;';
+                    case "'": return '&apos;';
+                    case '"': return '&quot;';
+                }
+            });
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('outputArea');
+            output.select();
+            document.execCommand('copy');
+
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
