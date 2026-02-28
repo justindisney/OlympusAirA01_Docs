@@ -80,7 +80,6 @@
             border: 1px solid var(--border);
             border-radius: 2px;
             padding: 2rem;
-            text-decoration: none;
             transition: all 0.2s ease;
         }
 
@@ -106,16 +105,28 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-footer a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             color: var(--accent);
             font-weight: 400;
             font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .card-footer a:hover {
+            text-decoration: underline;
         }
 
         .arrow {
             transition: transform 0.2s ease;
         }
 
-        .card:hover .arrow {
+        .card-footer a:hover .arrow {
             transform: translateX(4px);
         }
 
@@ -199,23 +210,37 @@
         </div>
 
         <div class="cards">
-            <a href="olympus_air_a01_settings.html" class="card">
+            <div class="card">
                 <h2>Settings Reference</h2>
                 <p>Complete quick-start guide for all camera properties and settings. Searchable reference with detailed explanations for every configuration option.</p>
                 <div class="card-footer">
-                    <span>Browse settings</span>
-                    <span class="arrow">→</span>
+                    <a href="olympus_air_a01_settings.html">
+                        <span>Browse settings</span>
+                        <span class="arrow">→</span>
+                    </a>
                 </div>
-            </a>
+            </div>
 
-            <a href="play_opc_favorites_builder.html" class="card">
+            <div class="card">
                 <h2>Favorites Builder</h2>
                 <p>Interactive configuration builder for creating custom camera presets. Includes lens-aware restrictions and dependency validation. Requires the <a href="https://apps.apple.com/us/app/play-opc/id999316498" target="_blank">Play OPC</a> iOS app.</p>
                 <div class="card-footer">
-                    <span>Build configuration</span>
-                    <span class="arrow">→</span>
+                    <a href="play_opc_favorites_builder.html">
+                        <span>Build configuration</span>
+                        <span class="arrow">→</span>
+                    </a>
                 </div>
-            </a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Using Favorites with Play OPC</h3>
+            <ul>
+                <li>Download <a href="https://apps.apple.com/us/app/play-opc/id999316498" target="_blank">Play OPC</a> from the iOS App Store</li>
+                <li>Save your configuration with a filename starting with "Favorite-" (e.g., Favorite-MyConfig.plist)</li>
+                <li>Transfer the .plist file to the "Play OPC" folder in the Files app on your iPhone</li>
+                <li>Load the favorite preset from within the Play OPC app</li>
+            </ul>
         </div>
 
         <div class="info-section">
