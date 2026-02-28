@@ -102,8 +102,7 @@
         }
 
         .section {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            padding-bottom: 1rem;
         }
 
         .section:last-child {
@@ -893,7 +892,7 @@
                                 <option value="single">Single Filter</option>
                                 <option value="bracket">Art Bracket (Multiple Filters)</option>
                             </select>
-                            <div class="help-text">Single = one filter, Bracket = multiple filters per shot</div>
+                            <div class="help-text">Single = single filtered image, Bracket = multiple images, one filter per image</div>
                         </div>
 
                         <!-- Single Art Filter -->
@@ -925,6 +924,7 @@
                                     <option value="TYPE2">Type 2</option>
                                     <option value="TYPE3">Type 3</option>
                                 </select>
+                                <div class="help-text">How strongly the filter effect is applied</div>
                             </div>
 
                             <div class="form-group">
@@ -934,7 +934,7 @@
                                     <option value="FANTASIC_FOCUS">Soft Focus overlay</option>
                                     <option value="TOY_PHOTO">Vignetting/darkened edges</option>
                                     <option value="WHITE_EDGE">White border edges</option>
-                                    <option value="FRAME_JAGGY">Jagged frame effect</option>
+                                    <option value="FRAME_JAGGY">Sloppy border effect</option>
                                     <option value="STARLIGHT">Star/sparkle effects</option>
                                     <option value="MINIATURE_VERTICAL">Vertical selective blur</option>
                                     <option value="MINIATURE_HORIZON">Horizontal selective blur</option>
@@ -1093,7 +1093,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>RAW Format</label>
+                            <label>File Format</label>
                             <select id="raw">
                                 <option value="OFF">JPEG Only</option>
                                 <option value="ON">RAW + JPEG</option>
