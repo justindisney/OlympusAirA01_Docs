@@ -122,6 +122,33 @@
             letter-spacing: 0.3px;
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-title:hover {
+            color: var(--secondary);
+        }
+
+        .section-title::before {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+
+        .section-title.collapsed::before {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+
+        .section-content.collapsed {
+            max-height: 0 !important;
+            opacity: 0;
+            margin: 0;
         }
 
         .form-group {
@@ -192,7 +219,7 @@
             border-left: 2px solid var(--accent);
             padding: 1rem;
             border-radius: 2px;
-            margin-top: 0.5rem;
+            margin-top: 1.5rem;
             font-size: 0.875rem;
             font-weight: 300;
         }
@@ -382,8 +409,8 @@
         <header>
             <img src="logoAirA01.png" alt="Olympus Air" class="logo">
             <div class="header-content">
-                <h1>Configuration Builder</h1>
-                <p>Create custom camera configurations with lens-aware restrictions and dependency validation</p>
+                <h1>Play OPC Favorites Builder</h1>
+                <p>Create custom camera configurations with lens-aware restrictions and dependency validation. Requires the <a href="https://apps.apple.com/us/app/play-opc/id999316498" target="_blank">Play OPC</a> iOS app.</p>
             </div>
         </header>
 
@@ -804,7 +831,6 @@
                                     <option value="PARTCOLOR">Partial Color</option>
                                 </optgroup>
                             </select>
-                            <div class="help-text">All 22 valid COLORTONE values from PlayOPC source code</div>
                         </div>
 
                         <div id="pictureAdjustments" class="subsection">
@@ -1104,21 +1130,18 @@
 
             <!-- Output Panel -->
             <div class="output-panel">
-                <h2 class="section-title">Generated .plist File</h2>
-
-                <div class="info-box">
-                    <strong>Using with Play OPC:</strong><br>
-                    1. Download <a href="https://apps.apple.com/us/app/play-opc/id999316498" target="_blank" style="color: var(--accent);">Play OPC</a> from the iOS App Store<br>
-                    2. Click "Download .plist" below to save the file (must start with "Favorite-")<br>
-                    3. Transfer the .plist file to the "Play OPC" folder in the Files app on your iPhone<br>
-                    4. Load the favorite preset from within the Play OPC app
-                </div>
-
                 <textarea id="outputArea" readonly placeholder="Configure settings and click 'Generate Configuration' to see the output..."></textarea>
                 <div class="output-actions">
                     <button class="btn btn-primary" onclick="generatePlist()">Generate Configuration</button>
                     <button class="btn btn-secondary" onclick="downloadPlist()">Download .plist</button>
                     <button class="btn btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                </div>
+
+                <div class="info-box">
+                    <strong>Using with Play OPC:</strong><br>
+                    1. Click "Download .plist" to save the file<br>
+                    2. Transfer the .plist file to the "Play OPC" folder in the Files app on your iPhone<br>
+                    3. Load the favorite preset from within the Play OPC app
                 </div>
             </div>
         </div>
@@ -1732,8 +1755,59 @@
 
         let selectedLens = null;
 
+        // Initialize accordion functionality
+        function initializeAccordion() {
+            const sections = document.querySelectorAll('.section');
+            const expandedByDefault = ['Configuration Details', 'Lens Selection', 'Shooting Mode'];
+
+            sections.forEach(section => {
+                const title = section.querySelector('.section-title');
+                const content = document.createElement('div');
+                content.className = 'section-content';
+
+                // Move all children except the title into the content wrapper
+                while (section.children.length > 1) {
+                    content.appendChild(section.children[1]);
+                }
+                section.appendChild(content);
+
+                // Check if this section should be collapsed by default
+                const shouldCollapse = !expandedByDefault.includes(title.textContent.trim());
+
+                if (shouldCollapse) {
+                    title.classList.add('collapsed');
+                    content.classList.add('collapsed');
+                } else {
+                    // Set initial max-height for expanded sections
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+
+                // Add click handler
+                title.addEventListener('click', function() {
+                    const isCollapsed = title.classList.contains('collapsed');
+
+                    if (isCollapsed) {
+                        // Expand
+                        title.classList.remove('collapsed');
+                        content.classList.remove('collapsed');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        // Collapse
+                        title.classList.add('collapsed');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        // Force reflow
+                        content.offsetHeight;
+                        content.classList.add('collapsed');
+                    }
+                });
+            });
+        }
+
         // Initialize event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize accordion
+            initializeAccordion();
+
             // Lens selection
             document.getElementById('lensSelect').addEventListener('change', handleLensChange);
 
