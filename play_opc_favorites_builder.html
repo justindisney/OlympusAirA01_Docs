@@ -1935,6 +1935,10 @@
             // Initialize dependency states
             updateDependencies();
 
+            // Initialize drive mode state (enables/disables bracketing and interval timer)
+            const initialDriveMode = document.getElementById('takeDrive');
+            handleDriveModeChange({target: initialDriveMode});
+
             // Lens selection
             document.getElementById('lensSelect').addEventListener('change', handleLensChange);
 
