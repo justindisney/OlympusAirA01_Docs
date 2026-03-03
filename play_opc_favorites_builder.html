@@ -880,6 +880,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label>Preserve Warm Tungsten Cast <span class="conditional">(Auto WB only)</span></label>
+                            <select id="autoWbDenkyuColoredLeaving">
+                                <option value="OFF">Off - Correct tungsten to neutral</option>
+                                <option value="ON">On - Keep warm atmosphere</option>
+                            </select>
+                            <div class="help-text">When ON, Auto WB preserves the warm orange cast of tungsten/incandescent lighting</div>
+                        </div>
                     </div>
 
                     <!-- Art Filters -->
@@ -2099,6 +2108,12 @@
                 if (wbPropG) {  // Only add if not null (custom WB doesn't support fine-tuning)
                     config[wbPropG] = wbRevG;
                 }
+            }
+
+            // Preserve warm tungsten cast (only relevant for Auto WB)
+            const autoWbDenkyuColoredLeaving = document.getElementById('autoWbDenkyuColoredLeaving').value;
+            if (autoWbDenkyuColoredLeaving !== 'OFF') {
+                config.AUTO_WB_DENKYU_COLORED_LEAVING = autoWbDenkyuColoredLeaving;
             }
 
             // Picture style
