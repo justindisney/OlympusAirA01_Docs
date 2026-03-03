@@ -653,22 +653,22 @@
                             <td>Picture mode - <a href="#colortone-detail" class="property-link">details</a></td>
                         </tr>
                         <tr data-category="picture" data-required="nc">
-                            <td><code>CONTRAST_NATURAL</code></td>
+                            <td><code>CONTRAST_*</code></td>
                             <td><span class="required-badge required-nc">N*</span></td>
-                            <td class="values-cell">-5 to +5</td>
-                            <td>Contrast (COLORTONE=NATURAL)</td>
+                            <td class="values-cell">-2 to +2</td>
+                            <td>Contrast (per picture mode) - <a href="#picture-adjust-detail" class="property-link">details</a></td>
                         </tr>
                         <tr data-category="picture" data-required="nc">
-                            <td><code>SHARP_NATURAL</code></td>
+                            <td><code>SHARP_*</code></td>
                             <td><span class="required-badge required-nc">N*</span></td>
-                            <td class="values-cell">-5 to +5</td>
-                            <td>Sharpness (COLORTONE=NATURAL)</td>
+                            <td class="values-cell">-2 to +2</td>
+                            <td>Sharpness (per picture mode) - <a href="#picture-adjust-detail" class="property-link">details</a></td>
                         </tr>
                         <tr data-category="picture" data-required="nc">
-                            <td><code>SATURATION_LEVEL_NATURAL</code></td>
+                            <td><code>SATURATION_LEVEL_*</code></td>
                             <td><span class="required-badge required-nc">N*</span></td>
-                            <td class="values-cell">-5 to +5</td>
-                            <td>Saturation (COLORTONE=NATURAL)</td>
+                            <td class="values-cell">-2 to +2</td>
+                            <td>Saturation (per picture mode) - <a href="#picture-adjust-detail" class="property-link">details</a></td>
                         </tr>
                         <tr data-category="picture" data-required="nc">
                             <td><code>TONE_*</code></td>
@@ -1212,6 +1212,95 @@
 
                 <div class="info-box">
                     <strong>Note:</strong> <code>SOFT</code> is NOT a valid COLORTONE value. Properties like <code>CONTRAST_SOFT</code>, <code>SHARP_SOFT</code>, <code>SATURATION_LEVEL_SOFT</code>, and <code>TONE_SOFT</code> exist in the API but do not correspond to any actual picture mode and appear to be legacy/unused.
+                </div>
+            </div>
+
+            <div class="detail-section" id="picture-adjust-detail">
+                <h2>Picture Mode Adjustments (Contrast, Sharpness, Saturation)</h2>
+                <p>Each picture mode has its own set of adjustable parameters for fine-tuning the look. All adjustments use a <strong>-2 to +2</strong> scale.</p>
+
+                <h3>Available Properties by Picture Mode</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Picture Mode</th>
+                            <th>Contrast</th>
+                            <th>Sharpness</th>
+                            <th>Saturation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NATURAL</td>
+                            <td><code>CONTRAST_NATURAL</code></td>
+                            <td><code>SHARP_NATURAL</code></td>
+                            <td><code>SATURATION_LEVEL_NATURAL</code></td>
+                        </tr>
+                        <tr>
+                            <td>VIVID</td>
+                            <td><code>CONTRAST_VIVID</code></td>
+                            <td><code>SHARP_VIVID</code></td>
+                            <td><code>SATURATION_LEVEL_VIVID</code></td>
+                        </tr>
+                        <tr>
+                            <td>FLAT</td>
+                            <td><code>CONTRAST_FLAT</code></td>
+                            <td><code>SHARP_FLAT</code></td>
+                            <td><code>SATURATION_LEVEL_FLAT</code></td>
+                        </tr>
+                        <tr>
+                            <td>I_FINISH</td>
+                            <td><code>CONTRAST_I_FINISH</code></td>
+                            <td><code>SHARP_I_FINISH</code></td>
+                            <td><code>SATURATION_LEVEL_I_FINISH</code></td>
+                        </tr>
+                        <tr>
+                            <td>Monotone</td>
+                            <td><code>CONTRAST_MONOCHROME</code></td>
+                            <td><code>SHARP_MONOCHROME</code></td>
+                            <td><em>N/A (B&W mode)</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Value Range</h3>
+                <p>All properties accept values from <strong>-2</strong> (minimum) to <strong>+2</strong> (maximum):</p>
+                <ul>
+                    <li><code>-2</code> - Minimum (softest/lowest)</li>
+                    <li><code>-1</code> - Reduced</li>
+                    <li><code>0</code> - Standard/neutral</li>
+                    <li><code>+1</code> - Enhanced</li>
+                    <li><code>+2</code> - Maximum (hardest/highest)</li>
+                </ul>
+
+                <h3>Usage Examples</h3>
+                <div class="example-box">
+                    <pre># Soft, low-contrast natural look
+&lt;COLORTONE/NATURAL&gt;
+&lt;CONTRAST_NATURAL/-2&gt;
+&lt;SHARP_NATURAL/-1&gt;
+&lt;SATURATION_LEVEL_NATURAL/0&gt;
+
+# Punchy, vivid look with enhanced sharpness
+&lt;COLORTONE/VIVID&gt;
+&lt;CONTRAST_VIVID/+2&gt;
+&lt;SHARP_VIVID/+2&gt;
+&lt;SATURATION_LEVEL_VIVID/+1&gt;
+
+# Flat profile optimized for post-processing
+&lt;COLORTONE/FLAT&gt;
+&lt;CONTRAST_FLAT/-2&gt;
+&lt;SHARP_FLAT/-1&gt;
+&lt;SATURATION_LEVEL_FLAT/0&gt;
+
+# High-contrast B&W
+&lt;COLORTONE/Monotone&gt;
+&lt;CONTRAST_MONOCHROME/+2&gt;
+&lt;SHARP_MONOCHROME/+1&gt;</pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Note:</strong> <code>CONTRAST_SOFT</code>, <code>SHARP_SOFT</code>, and <code>SATURATION_LEVEL_SOFT</code> exist in the API but are not usable since SOFT is not a valid COLORTONE mode.
                 </div>
             </div>
 
