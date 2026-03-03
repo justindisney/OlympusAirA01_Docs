@@ -1839,6 +1839,9 @@
             // Initialize accordion
             initializeAccordion();
 
+            // Initialize dependency states
+            updateDependencies();
+
             // Lens selection
             document.getElementById('lensSelect').addEventListener('change', handleLensChange);
 
@@ -1974,13 +1977,26 @@
             const shutter = document.getElementById('shutter');
             const focusMode = document.getElementById('focusMode');
             const artFilterSection = document.getElementById('artFilterSection');
+            const apertureReq = document.getElementById('apertureReq');
 
             // Aperture control (requires TAKEMODE A or M, and a lens to be selected)
-            if ((takemode === 'A' || takemode === 'M') && selectedLens) {
+            const takemodeOk = (takemode === 'A' || takemode === 'M');
+            const lensOk = selectedLens !== null;
+
+            if (takemodeOk && lensOk) {
                 aperture.disabled = false;
+                apertureReq.textContent = '';
             } else {
                 aperture.disabled = true;
                 aperture.value = '';
+                // Show what's missing
+                if (!lensOk && !takemodeOk) {
+                    apertureReq.textContent = '(Select lens & set TAKEMODE=A/M)';
+                } else if (!lensOk) {
+                    apertureReq.textContent = '(Select a lens first)';
+                } else if (!takemodeOk) {
+                    apertureReq.textContent = '(Set TAKEMODE=A/M)';
+                }
             }
 
             // Shutter control (requires TAKEMODE S or M)
