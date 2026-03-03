@@ -632,11 +632,11 @@
                         <h2 class="section-title">Exposure</h2>
 
                         <div class="form-group">
-                            <label>APERTURE <span class="conditional" id="apertureReq">(Requires TAKEMODE=A/M)</span></label>
+                            <label>APERTURE <span class="conditional" id="apertureReq">(Requires TAKEMODE=A/M and lens selection)</span></label>
                             <select id="aperture" disabled>
                                 <option value="">Auto</option>
                             </select>
-                            <div class="help-text">Available apertures based on selected lens</div>
+                            <div class="help-text">Select a lens first to populate aperture options</div>
                         </div>
 
                         <div class="form-group">
@@ -1961,8 +1961,8 @@
             const focusMode = document.getElementById('focusMode');
             const artFilterSection = document.getElementById('artFilterSection');
 
-            // Aperture control (requires TAKEMODE A or M, and lens with electronic aperture)
-            if ((takemode === 'A' || takemode === 'M') && selectedLens && selectedLens.hasAF) {
+            // Aperture control (requires TAKEMODE A or M, and a lens to be selected)
+            if ((takemode === 'A' || takemode === 'M') && selectedLens) {
                 aperture.disabled = false;
             } else {
                 aperture.disabled = true;
