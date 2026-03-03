@@ -670,6 +670,12 @@
                             <td class="values-cell">-5 to +5</td>
                             <td>Saturation (COLORTONE=NATURAL)</td>
                         </tr>
+                        <tr data-category="picture" data-required="nc">
+                            <td><code>TONE_*</code></td>
+                            <td><span class="required-badge required-nc">N*</span></td>
+                            <td class="values-cell">AUTO | NORMAL | HIGHKEY | LOWKEY</td>
+                            <td>Gradation/tone curve (per picture mode) - <a href="#gradation-detail" class="property-link">details</a></td>
+                        </tr>
                         <tr data-category="picture" data-required="n">
                             <td><code>TONE_CONTROL_LOW</code></td>
                             <td><span class="required-badge required-n">N</span></td>
@@ -1206,6 +1212,84 @@
 
                 <div class="info-box">
                     <strong>Note:</strong> <code>SOFT</code> is NOT a valid COLORTONE value. Properties like <code>CONTRAST_SOFT</code>, <code>SHARP_SOFT</code>, <code>SATURATION_LEVEL_SOFT</code>, and <code>TONE_SOFT</code> exist in the API but do not correspond to any actual picture mode and appear to be legacy/unused.
+                </div>
+            </div>
+
+            <div class="detail-section" id="gradation-detail">
+                <h2>TONE - Gradation (Tone Curve Presets)</h2>
+                <p>Gradation controls the overall tonal distribution of the image using preset tone curves. Each picture mode has its own TONE property.</p>
+
+                <div class="info-box">
+                    <strong>Important:</strong> TONE properties (gradation) are different from TONE_CONTROL properties (shadow/midtone/highlight). Gradation sets the overall tone curve preset, while tone control provides fine-tuning adjustments.
+                </div>
+
+                <h3>Available TONE Properties</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Required COLORTONE</th>
+                            <th>Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>TONE_NATURAL</code></td>
+                            <td>NATURAL</td>
+                            <td>AUTO, NORMAL, HIGHKEY, LOWKEY</td>
+                        </tr>
+                        <tr>
+                            <td><code>TONE_VIVID</code></td>
+                            <td>VIVID</td>
+                            <td>AUTO, NORMAL, HIGHKEY, LOWKEY</td>
+                        </tr>
+                        <tr>
+                            <td><code>TONE_FLAT</code></td>
+                            <td>FLAT</td>
+                            <td>AUTO, NORMAL, HIGHKEY, LOWKEY</td>
+                        </tr>
+                        <tr>
+                            <td><code>TONE_I_FINISH</code></td>
+                            <td>I_FINISH</td>
+                            <td>AUTO, NORMAL, HIGHKEY, LOWKEY</td>
+                        </tr>
+                        <tr>
+                            <td><code>TONE_MONOCHROME</code></td>
+                            <td>Monotone</td>
+                            <td>AUTO, NORMAL, HIGHKEY, LOWKEY</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Gradation Values</h3>
+                <ul>
+                    <li><code>AUTO</code> - Camera automatically selects tone curve</li>
+                    <li><code>NORMAL</code> - Standard tone curve distribution</li>
+                    <li><code>HIGHKEY</code> - High Key (brightens overall, expands highlight range)</li>
+                    <li><code>LOWKEY</code> - Low Key (darkens overall, expands shadow range)</li>
+                </ul>
+
+                <h3>Usage Examples</h3>
+                <div class="example-box">
+                    <pre># High-key natural look (bright and airy)
+&lt;COLORTONE/NATURAL&gt;
+&lt;TONE_NATURAL/HIGHKEY&gt;
+
+# Low-key vivid look (moody and dramatic)
+&lt;COLORTONE/VIVID&gt;
+&lt;TONE_VIVID/LOWKEY&gt;
+
+# Flat profile for post-processing
+&lt;COLORTONE/FLAT&gt;
+&lt;TONE_FLAT/NORMAL&gt;
+
+# High-key black & white
+&lt;COLORTONE/Monotone&gt;
+&lt;TONE_MONOCHROME/HIGHKEY&gt;</pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Use Case:</strong> Gradation is ideal for controlling the overall mood and tonal range. Use HIGHKEY for bright, airy portraits and LOWKEY for dramatic, moody scenes. Combine with TONE_CONTROL properties for precise tonal adjustments.
                 </div>
             </div>
 
