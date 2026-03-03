@@ -1141,6 +1141,56 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label>Interval Timer <span class="conditional">(Requires Single Shot mode)</span></label>
+                            <select id="intervalTimerMode" disabled>
+                                <option value="0">Off</option>
+                                <option value="1">On</option>
+                            </select>
+                            <div class="help-text">Time-lapse photography: shoot at regular intervals</div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Interval Time <span class="conditional">(Requires Interval Timer on)</span></label>
+                                <select id="intervalTimerTime" disabled>
+                                    <option value="1">1 second</option>
+                                    <option value="3">3 seconds</option>
+                                    <option value="5">5 seconds</option>
+                                    <option value="10">10 seconds</option>
+                                    <option value="15">15 seconds</option>
+                                    <option value="20">20 seconds</option>
+                                    <option value="30">30 seconds</option>
+                                    <option value="60">1 minute</option>
+                                    <option value="120">2 minutes</option>
+                                    <option value="180">3 minutes</option>
+                                    <option value="300">5 minutes</option>
+                                    <option value="600">10 minutes</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Shot Count <span class="conditional">(Requires Interval Timer on)</span></label>
+                                <select id="intervalTimerCount" disabled>
+                                    <option value="3">3 shots</option>
+                                    <option value="5">5 shots</option>
+                                    <option value="10">10 shots</option>
+                                    <option value="30">30 shots</option>
+                                    <option value="60">60 shots</option>
+                                    <option value="90">90 shots</option>
+                                    <option value="120">120 shots</option>
+                                    <option value="180">180 shots</option>
+                                    <option value="240">240 shots</option>
+                                    <option value="300">300 shots</option>
+                                    <option value="360">360 shots</option>
+                                    <option value="480">480 shots</option>
+                                    <option value="600">600 shots</option>
+                                    <option value="720">720 shots</option>
+                                    <option value="960">960 shots</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Image Quality -->
@@ -1897,6 +1947,9 @@
             // Bracketing
             document.getElementById('bracketingMode').addEventListener('change', handleBracketingChange);
 
+            // Interval timer
+            document.getElementById('intervalTimerMode').addEventListener('change', handleIntervalTimerChange);
+
             // Color tone
             document.getElementById('colortone').addEventListener('change', handleColortoneChange);
 
@@ -1952,10 +2005,24 @@
 
         function handleDriveModeChange(e) {
             const continuousVelocity = document.getElementById('continuousVelocity');
+            const intervalTimerMode = document.getElementById('intervalTimerMode');
+
             if (e.target.value === 'DRIVE_CONTINUE') {
                 continuousVelocity.disabled = false;
+                // Disable interval timer in continuous mode
+                intervalTimerMode.disabled = true;
+                intervalTimerMode.value = '0';
+                // Trigger interval timer change to disable its children
+                handleIntervalTimerChange({target: intervalTimerMode});
+            } else if (e.target.value === 'DRIVE_NORMAL') {
+                continuousVelocity.disabled = true;
+                // Enable interval timer only in single shot mode
+                intervalTimerMode.disabled = false;
             } else {
                 continuousVelocity.disabled = true;
+                intervalTimerMode.disabled = true;
+                intervalTimerMode.value = '0';
+                handleIntervalTimerChange({target: intervalTimerMode});
             }
         }
 
@@ -1969,6 +2036,19 @@
             } else {
                 bracketingCount.disabled = true;
                 bracketingStep.disabled = true;
+            }
+        }
+
+        function handleIntervalTimerChange(e) {
+            const intervalTimerTime = document.getElementById('intervalTimerTime');
+            const intervalTimerCount = document.getElementById('intervalTimerCount');
+
+            if (e.target.value === '1') {
+                intervalTimerTime.disabled = false;
+                intervalTimerCount.disabled = false;
+            } else {
+                intervalTimerTime.disabled = true;
+                intervalTimerCount.disabled = true;
             }
         }
 
@@ -2276,6 +2356,16 @@
                 config.AutoBracketingStep = document.getElementById('bracketingStep').value;
             }
 
+            // Interval Timer (only valid with DRIVE_NORMAL)
+            if (takeDrive === 'DRIVE_NORMAL') {
+                const intervalTimerMode = document.getElementById('intervalTimerMode').value;
+                if (intervalTimerMode === '1') {
+                    config.IntervalTimerMode = intervalTimerMode;
+                    config.IntervalTimerTime = document.getElementById('intervalTimerTime').value;
+                    config.IntervalTimerCount = document.getElementById('intervalTimerCount').value;
+                }
+            }
+
             // Image quality
             const imageSize = document.getElementById('imageSize').value;
             if (imageSize !== '4608x3456') {
@@ -2364,13 +2454,17 @@
             xml += '\t\t<key>FormatVersion</key>\n';
             xml += '\t\t<string>1.0</string>\n';
 
-            // Interval Timer settings (defaults)
+            // Interval Timer settings
+            const intervalTimerCount = config.IntervalTimerCount || 3;
+            const intervalTimerMode = config.IntervalTimerMode || 0;
+            const intervalTimerTime = config.IntervalTimerTime || 1;
+
             xml += '\t\t<key>IntervalTimerCount</key>\n';
-            xml += '\t\t<integer>3</integer>\n';
+            xml += `\t\t<integer>${intervalTimerCount}</integer>\n`;
             xml += '\t\t<key>IntervalTimerMode</key>\n';
-            xml += '\t\t<integer>0</integer>\n';
+            xml += `\t\t<integer>${intervalTimerMode}</integer>\n`;
             xml += '\t\t<key>IntervalTimerTime</key>\n';
-            xml += '\t\t<real>1</real>\n';
+            xml += `\t\t<real>${intervalTimerTime}</real>\n`;
 
             // Live View settings
             xml += '\t\t<key>LiveViewSize</key>\n';
@@ -2383,7 +2477,7 @@
             xml += '\t\t<dict>\n';
 
             // Metadata fields that shouldn't be in PropertyValues
-            const metadataFields = ['name', 'AutoBracketingCount', 'AutoBracketingMode', 'AutoBracketingStep'];
+            const metadataFields = ['name', 'AutoBracketingCount', 'AutoBracketingMode', 'AutoBracketingStep', 'IntervalTimerCount', 'IntervalTimerMode', 'IntervalTimerTime'];
 
             for (const [key, value] of Object.entries(config)) {
                 if (metadataFields.includes(key)) continue;
