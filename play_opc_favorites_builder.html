@@ -1108,8 +1108,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Auto Exposure Bracketing</label>
-                            <select id="bracketingMode">
+                            <label>Auto Exposure Bracketing <span class="conditional">(Requires Single Shot, disables Interval Timer)</span></label>
+                            <select id="bracketingMode" disabled>
                                 <option value="0">Off</option>
                                 <option value="1">On</option>
                             </select>
@@ -1143,7 +1143,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Interval Timer <span class="conditional">(Requires Single Shot mode)</span></label>
+                            <label>Interval Timer <span class="conditional">(Requires Single Shot, disables Auto Bracketing)</span></label>
                             <select id="intervalTimerMode" disabled>
                                 <option value="0">Off</option>
                                 <option value="1">On</option>
@@ -2005,21 +2005,30 @@
 
         function handleDriveModeChange(e) {
             const continuousVelocity = document.getElementById('continuousVelocity');
+            const bracketingMode = document.getElementById('bracketingMode');
             const intervalTimerMode = document.getElementById('intervalTimerMode');
 
             if (e.target.value === 'DRIVE_CONTINUE') {
+                // Continuous mode: enable velocity, disable bracketing and interval timer
                 continuousVelocity.disabled = false;
-                // Disable interval timer in continuous mode
+                bracketingMode.disabled = true;
+                bracketingMode.value = '0';
+                handleBracketingChange({target: bracketingMode});
                 intervalTimerMode.disabled = true;
                 intervalTimerMode.value = '0';
-                // Trigger interval timer change to disable its children
                 handleIntervalTimerChange({target: intervalTimerMode});
             } else if (e.target.value === 'DRIVE_NORMAL') {
+                // Single Shot mode: disable velocity, enable bracketing and interval timer
+                // (but they are mutually exclusive - handled in their respective change handlers)
                 continuousVelocity.disabled = true;
-                // Enable interval timer only in single shot mode
+                bracketingMode.disabled = false;
                 intervalTimerMode.disabled = false;
             } else {
+                // Other drive modes: disable everything
                 continuousVelocity.disabled = true;
+                bracketingMode.disabled = true;
+                bracketingMode.value = '0';
+                handleBracketingChange({target: bracketingMode});
                 intervalTimerMode.disabled = true;
                 intervalTimerMode.value = '0';
                 handleIntervalTimerChange({target: intervalTimerMode});
@@ -2029,26 +2038,54 @@
         function handleBracketingChange(e) {
             const bracketingCount = document.getElementById('bracketingCount');
             const bracketingStep = document.getElementById('bracketingStep');
+            const intervalTimerMode = document.getElementById('intervalTimerMode');
 
             if (e.target.value === '1') {
+                // Enable bracketing controls
                 bracketingCount.disabled = false;
                 bracketingStep.disabled = false;
+                // Disable interval timer (mutually exclusive)
+                if (!intervalTimerMode.disabled || intervalTimerMode.value !== '0') {
+                    intervalTimerMode.disabled = true;
+                    intervalTimerMode.value = '0';
+                    handleIntervalTimerChange({target: intervalTimerMode});
+                }
             } else {
+                // Disable bracketing controls
                 bracketingCount.disabled = true;
                 bracketingStep.disabled = true;
+                // Re-enable interval timer only if it was disabled by bracketing
+                const takeDrive = document.getElementById('takeDrive').value;
+                if (takeDrive === 'DRIVE_NORMAL' && intervalTimerMode.disabled) {
+                    intervalTimerMode.disabled = false;
+                }
             }
         }
 
         function handleIntervalTimerChange(e) {
             const intervalTimerTime = document.getElementById('intervalTimerTime');
             const intervalTimerCount = document.getElementById('intervalTimerCount');
+            const bracketingMode = document.getElementById('bracketingMode');
 
             if (e.target.value === '1') {
+                // Enable interval timer controls
                 intervalTimerTime.disabled = false;
                 intervalTimerCount.disabled = false;
+                // Disable auto bracketing (mutually exclusive)
+                if (!bracketingMode.disabled || bracketingMode.value !== '0') {
+                    bracketingMode.disabled = true;
+                    bracketingMode.value = '0';
+                    handleBracketingChange({target: bracketingMode});
+                }
             } else {
+                // Disable interval timer controls
                 intervalTimerTime.disabled = true;
                 intervalTimerCount.disabled = true;
+                // Re-enable bracketing only if it was disabled by interval timer
+                const takeDrive = document.getElementById('takeDrive').value;
+                if (takeDrive === 'DRIVE_NORMAL' && bracketingMode.disabled) {
+                    bracketingMode.disabled = false;
+                }
             }
         }
 

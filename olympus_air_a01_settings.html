@@ -756,7 +756,7 @@
                             <td><code>AutoBracketingMode</code></td>
                             <td><span class="required-badge required-n">N</span></td>
                             <td class="values-cell">0 | 1</td>
-                            <td>Exposure bracketing off/on</td>
+                            <td>Exposure bracketing off/on (requires TAKE_DRIVE=DRIVE_NORMAL, mutually exclusive with IntervalTimerMode)</td>
                         </tr>
                         <tr data-category="drive" data-required="nc">
                             <td><code>AutoBracketingCount</code></td>
@@ -774,7 +774,7 @@
                             <td><code>IntervalTimerMode</code></td>
                             <td><span class="required-badge required-nc">N*</span></td>
                             <td class="values-cell">0 | 1</td>
-                            <td>Interval timer off/on (requires TAKE_DRIVE=DRIVE_NORMAL)</td>
+                            <td>Interval timer off/on (requires TAKE_DRIVE=DRIVE_NORMAL, mutually exclusive with AutoBracketingMode)</td>
                         </tr>
                         <tr data-category="drive" data-required="nc">
                             <td><code>IntervalTimerTime</code></td>
