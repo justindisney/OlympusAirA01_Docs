@@ -643,38 +643,81 @@
                             <label>SHUTTER <span class="conditional">(Requires TAKEMODE=S/M)</span></label>
                             <select id="shutter" disabled>
                                 <option value="">Auto</option>
-                                <option value="4000">1/4000</option>
-                                <option value="3200">1/3200</option>
-                                <option value="2500">1/2500</option>
-                                <option value="2000">1/2000</option>
-                                <option value="1600">1/1600</option>
-                                <option value="1250">1/1250</option>
-                                <option value="1000">1/1000</option>
-                                <option value="800">1/800</option>
-                                <option value="640">1/640</option>
-                                <option value="500">1/500</option>
-                                <option value="400">1/400</option>
-                                <option value="320">1/320</option>
-                                <option value="250">1/250</option>
-                                <option value="200">1/200</option>
-                                <option value="160">1/160</option>
-                                <option value="125">1/125</option>
-                                <option value="100">1/100</option>
-                                <option value="80">1/80</option>
-                                <option value="60">1/60</option>
-                                <option value="50">1/50</option>
-                                <option value="40">1/40</option>
-                                <option value="30">1/30</option>
-                                <option value="25">1/25</option>
-                                <option value="20">1/20</option>
-                                <option value="15">1/15</option>
-                                <option value="13">1/13</option>
-                                <option value="10">1/10</option>
-                                <option value="8">1/8</option>
-                                <option value="6">1/6</option>
-                                <option value="5">1/5</option>
-                                <option value="4">1/4</option>
+                                <optgroup label="Ultra-Fast (1/4000 - 1/16000)">
+                                    <option value="16000">1/16000</option>
+                                    <option value="12800">1/12800</option>
+                                    <option value="10000">1/10000</option>
+                                    <option value="8000">1/8000</option>
+                                    <option value="6400">1/6400</option>
+                                    <option value="5000">1/5000</option>
+                                    <option value="4000">1/4000</option>
+                                </optgroup>
+                                <optgroup label="Fast (1/250 - 1/3200)">
+                                    <option value="3200">1/3200</option>
+                                    <option value="2500">1/2500</option>
+                                    <option value="2000">1/2000</option>
+                                    <option value="1600">1/1600</option>
+                                    <option value="1250">1/1250</option>
+                                    <option value="1000">1/1000</option>
+                                    <option value="800">1/800</option>
+                                    <option value="640">1/640</option>
+                                    <option value="500">1/500</option>
+                                    <option value="400">1/400</option>
+                                    <option value="320">1/320</option>
+                                    <option value="250">1/250</option>
+                                </optgroup>
+                                <optgroup label="Medium (1/15 - 1/200)">
+                                    <option value="200">1/200</option>
+                                    <option value="160">1/160</option>
+                                    <option value="125">1/125</option>
+                                    <option value="100">1/100</option>
+                                    <option value="80">1/80</option>
+                                    <option value="60">1/60</option>
+                                    <option value="50">1/50</option>
+                                    <option value="40">1/40</option>
+                                    <option value="30">1/30</option>
+                                    <option value="25">1/25</option>
+                                    <option value="20">1/20</option>
+                                    <option value="15">1/15</option>
+                                </optgroup>
+                                <optgroup label="Slow (1/5 - 1/13)">
+                                    <option value="13">1/13</option>
+                                    <option value="10">1/10</option>
+                                    <option value="8">1/8</option>
+                                    <option value="6">1/6</option>
+                                    <option value="5">1/5</option>
+                                </optgroup>
+                                <optgroup label="Between 1/4s and 1s">
+                                    <option value='4"'>1/4 (0.25s)</option>
+                                    <option value='3.2"'>1/3.2 (0.31s)</option>
+                                    <option value='2.5"'>1/2.5 (0.4s)</option>
+                                    <option value='2"'>1/2 (0.5s)</option>
+                                    <option value='1.6"'>1/1.6 (0.62s)</option>
+                                    <option value='1.3"'>1/1.3 (0.77s)</option>
+                                </optgroup>
+                                <optgroup label="Long Exposure (1 - 60 seconds)">
+                                    <option value="1">1s</option>
+                                    <option value="1.3">1.3s</option>
+                                    <option value="1.6">1.6s</option>
+                                    <option value="2">2s</option>
+                                    <option value="2.5">2.5s</option>
+                                    <option value="3">3s</option>
+                                    <option value="4">4s</option>
+                                    <option value="5">5s</option>
+                                    <option value="6">6s</option>
+                                    <option value="8">8s</option>
+                                    <option value="10">10s</option>
+                                    <option value="13">13s</option>
+                                    <option value="15">15s</option>
+                                    <option value="20">20s</option>
+                                    <option value="25">25s</option>
+                                    <option value="30">30s</option>
+                                    <option value="40">40s</option>
+                                    <option value="50">50s</option>
+                                    <option value="60">60s</option>
+                                </optgroup>
                             </select>
+                            <div class="help-text">1/16000s to 60s full range for all photography needs</div>
                         </div>
 
                         <div class="form-group">
