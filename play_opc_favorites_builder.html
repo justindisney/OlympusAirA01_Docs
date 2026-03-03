@@ -1049,32 +1049,30 @@
                             </select>
                         </div>
 
-                        <div id="bracketingSettings" style="display: none;">
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label>Bracket Count</label>
-                                    <select id="bracketingCount">
-                                        <option value="3">3 shots</option>
-                                        <option value="5">5 shots</option>
-                                        <option value="7">7 shots</option>
-                                        <option value="9">9 shots</option>
-                                    </select>
-                                </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Bracket Count <span class="conditional">(Requires Bracketing on)</span></label>
+                                <select id="bracketingCount" disabled>
+                                    <option value="3">3 shots</option>
+                                    <option value="5">5 shots</option>
+                                    <option value="7">7 shots</option>
+                                    <option value="9">9 shots</option>
+                                </select>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Bracket Step</label>
-                                    <select id="bracketingStep">
-                                        <option value="1">±1 EV</option>
-                                        <option value="2">±2 EV</option>
-                                        <option value="3">±3 EV</option>
-                                        <option value="4">±4 EV</option>
-                                        <option value="5">±5 EV</option>
-                                        <option value="6">±6 EV</option>
-                                        <option value="7">±7 EV</option>
-                                        <option value="8">±8 EV</option>
-                                        <option value="9">±9 EV</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label>Bracket Step <span class="conditional">(Requires Bracketing on)</span></label>
+                                <select id="bracketingStep" disabled>
+                                    <option value="1">±1 EV</option>
+                                    <option value="2">±2 EV</option>
+                                    <option value="3">±3 EV</option>
+                                    <option value="4">±4 EV</option>
+                                    <option value="5">±5 EV</option>
+                                    <option value="6">±6 EV</option>
+                                    <option value="7">±7 EV</option>
+                                    <option value="8">±8 EV</option>
+                                    <option value="9">±9 EV</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -1890,26 +1888,18 @@
             } else {
                 continuousVelocity.disabled = true;
             }
-
-            // Recalculate parent section max-height
-            const parentSection = continuousVelocity.closest('.section-content');
-            if (parentSection && !parentSection.classList.contains('collapsed')) {
-                parentSection.style.maxHeight = parentSection.scrollHeight + 'px';
-            }
         }
 
         function handleBracketingChange(e) {
-            const bracketingSettings = document.getElementById('bracketingSettings');
-            if (e.target.value === '1') {
-                bracketingSettings.style.display = 'block';
-            } else {
-                bracketingSettings.style.display = 'none';
-            }
+            const bracketingCount = document.getElementById('bracketingCount');
+            const bracketingStep = document.getElementById('bracketingStep');
 
-            // Recalculate parent section max-height to accommodate the visibility change
-            const parentSection = bracketingSettings.closest('.section-content');
-            if (parentSection && !parentSection.classList.contains('collapsed')) {
-                parentSection.style.maxHeight = parentSection.scrollHeight + 'px';
+            if (e.target.value === '1') {
+                bracketingCount.disabled = false;
+                bracketingStep.disabled = false;
+            } else {
+                bracketingCount.disabled = true;
+                bracketingStep.disabled = true;
             }
         }
 
