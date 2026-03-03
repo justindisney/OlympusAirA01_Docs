@@ -1890,6 +1890,12 @@
             } else {
                 continuousVelocity.disabled = true;
             }
+
+            // Recalculate parent section max-height
+            const parentSection = continuousVelocity.closest('.section-content');
+            if (parentSection && !parentSection.classList.contains('collapsed')) {
+                parentSection.style.maxHeight = parentSection.scrollHeight + 'px';
+            }
         }
 
         function handleBracketingChange(e) {
@@ -1898,6 +1904,12 @@
                 bracketingSettings.style.display = 'block';
             } else {
                 bracketingSettings.style.display = 'none';
+            }
+
+            // Recalculate parent section max-height to accommodate the visibility change
+            const parentSection = bracketingSettings.closest('.section-content');
+            if (parentSection && !parentSection.classList.contains('collapsed')) {
+                parentSection.style.maxHeight = parentSection.scrollHeight + 'px';
             }
         }
 
